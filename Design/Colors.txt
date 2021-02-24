@@ -1,0 +1,6 @@
+Orange: #fcb941
+Gray: #333333
+Light Gray: #8f8f8f
+
+try font-icons first instead of image icons
+

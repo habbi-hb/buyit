@@ -1,0 +1,4 @@
+#Wed Feb 24 14:37:13 PKT 2021
+base.0=C\:\\Users\\habbi\\Desktop\\prok\\sohaib6030-buy-it-ad24ba723119\\android\\app\\build\\intermediates\\dex\\debug\\mergeDexDebug\\out\\classes.dex
+path.0=classes.dex
+renamed.0=classes.dex
