@@ -60,6 +60,7 @@ export let images = {
 };
 const mainurl = 'http://thecodeditors.com/test/carobar/';
 const mainurl2 = 'https://thecodeditors.com/test/carobar/';
+const mainurl3= 'https://thecodeditors.com/test/buy_it/'
 export const sliderpic =
   'https://thecodeditors.com/test/single_vendor/admin/slider_images/';
 export const cardimage =
@@ -76,18 +77,19 @@ export let api = {
   menuCategories: '',
   signup: mainurl + 'api-user-signup.php?',
   login: mainurl + 'api-user-login.php?',
-  topslider: '',
+  allproduct: 'https://thecodeditors.com/test/buy_it/api-get-allproduct.php',
   categorieslist: mainurl + 'api-get-subcategories.php?',
   categorieslistdetails: mainurl + 'api-get-product.php?',
   productdetails: mainurl + 'api-get-singleproduct.php?',
-  cartshow: mainurl2 + 'api-get-cartshow.php?user_id=',
+  cartshow: mainurl3 + 'api-get-cartshow.php?user_id=',
   checkout: mainurl + 'api-get-checkout.php?',
-  addcart: mainurl2 + 'api-get-cartadd.php?guest_id=',
+  addcart: mainurl3 + 'api-get-cartadd.php?guest_id=',
   deleteitem: mainurl + 'api-get-cartdel.php?cart_id=',
   recommendslider: mainurl + 'api-get-allproductrole.php?role=recommended',
   featuredslider: mainurl + 'api-get-allproductrole.php?role=featured',
   slider: mainurl + 'api-get-slider-images.php',
-  categories: 'https://thecodeditors.com/test/carobar/api-get-categories.php',
+  categories: 'https://thecodeditors.com/test/buy_it/api-get-categories.php',
   shop: 'https://thecodeditors.com/test/buy_it/api-get-shopname.php',
+  Recent: 'https://thecodeditors.com/test/buy_it/api-get-recentproducts.php',
   changepassword: mainurl2 + 'api-user-changepassword.php?id=',
 };

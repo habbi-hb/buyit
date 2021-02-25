@@ -16,7 +16,7 @@ import {colors, images} from './constant';
 import Entypo from 'react-native-vector-icons/Entypo';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Feather from 'react-native-vector-icons/Feather';
-import {api, cartimage} from './constant';
+import {api, cartimage, cartshow} from './constant';
 import AsyncStorage from '@react-native-community/async-storage';
 import login from './login';
 
@@ -113,6 +113,7 @@ let Login = () => {
         .then((json) => {
           setIsLoading(false);
           setData(json);
+          console.log("habbbi..........",data[1])
         })
         .catch((error) => console.error(error))
         .finally(() => setLoading(false));
@@ -196,7 +197,7 @@ let Login = () => {
                         name="close"
                         type="AntDesign"
                         style={{fontSize: 18, marginLeft: 'auto'}}
-                        onPress={() => navigation.openDrawer()}
+                      
                       />
                     </TouchableOpacity>
                     <View

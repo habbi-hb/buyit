@@ -44,7 +44,7 @@ const BottomAccount = (props) => {
           backgroundColor: '#fff',
         },
       }}>
-      <AccountScreen />
+
     </RBSheet>
   );
 };

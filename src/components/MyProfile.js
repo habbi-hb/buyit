@@ -19,17 +19,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 
 
 const RenderHeader = () => {
-  function handleBackButtonClick() {
-    navigation.goBack();
-    return true;
-  }
 
-  useEffect(() => {
-    BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
-    return () => {
-      BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
-    };
-  }, []);
   let navigation = useNavigation();
   return (
     <View style={{height: '10%'}}>

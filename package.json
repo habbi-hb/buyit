@@ -28,6 +28,7 @@
     "react-native-screens": "^2.17.1",
     "react-native-swiper-flatlist": "^3.0.13",
     "react-native-tab-view": "^2.15.2",
+    "react-native-unique-id": "^2.0.0",
     "react-native-vector-icons": "^8.0.0",
     "react-navigation": "^4.4.3"
   },

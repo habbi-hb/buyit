@@ -223,6 +223,7 @@ const App = () => {
                     onPress={() =>
                       navigation.navigate('CategoriesList', {id: item.cat_id})
                     }>
+                      
 
                     <Text style={{color: 'white', padding: 10}}>
                       {item.cat_name}
