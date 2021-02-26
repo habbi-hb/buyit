@@ -58,9 +58,9 @@ export let images = {
   logoAsiaTv: require('../assets/logo_asiatv.png'),
   trendingProduct: require('../assets/product.jpg'),
 };
-const mainurl = 'http://thecodeditors.com/test/carobar/';
-const mainurl2 = 'https://thecodeditors.com/test/carobar/';
-const mainurl3= 'https://thecodeditors.com/test/buy_it/'
+const mainurl = 'http://thecodeditors.com/test/buy_it/';
+const mainurl2 = 'https://thecodeditors.com/test/buy_it/';
+// const mainurl3= 'https://thecodeditors.com/test/buy_it/'
 export const sliderpic =
   'https://thecodeditors.com/test/single_vendor/admin/slider_images/';
 export const cardimage =
@@ -68,7 +68,7 @@ export const cardimage =
 export const cartimage =
   'https://thecodeditors.com/test/single_vendor/admin/plugin/product_images/';
 export const catlist =
-  'https://thecodeditors.com/test/single_vendor/admin/sub_category_images/';
+  'https://thecodeditors.com/test/multi_vendor/admin/sub_category_images/';
 
 export const featuredslider =
   'https://thecodeditors.com/test/single_vendor/admin/plugin/product_images/';
@@ -81,13 +81,15 @@ export let api = {
   categorieslist: mainurl + 'api-get-subcategories.php?',
   categorieslistdetails: mainurl + 'api-get-product.php?',
   productdetails: mainurl + 'api-get-singleproduct.php?',
-  cartshow: mainurl3 + 'api-get-cartshow.php?user_id=',
+  cartshow: mainurl + 'api-get-cartshow.php?user_id=',
   checkout: mainurl + 'api-get-checkout.php?',
-  addcart: mainurl3 + 'api-get-cartadd.php?guest_id=',
+  addcart: mainurl + 'api-get-cartadd.php?guest_id=',
   deleteitem: mainurl + 'api-get-cartdel.php?cart_id=',
-  recommendslider: mainurl + 'api-get-allproductrole.php?role=recommended',
-  featuredslider: mainurl + 'api-get-allproductrole.php?role=featured',
+  recommendslider: 'https://thecodeditors.com/test/buy_it/api-get-allproductrole.php?role=recommendation',
+  featuredslider: 'https://thecodeditors.com/test/buy_it/api-get-allproductrole.php?role=specialoffer',
+  BestSeller: 'https://thecodeditors.com/test/buy_it/api-get-allproductrole.php?role=bestseller',
   slider: mainurl + 'api-get-slider-images.php',
+
   categories: 'https://thecodeditors.com/test/buy_it/api-get-categories.php',
   shop: 'https://thecodeditors.com/test/buy_it/api-get-shopname.php',
   Recent: 'https://thecodeditors.com/test/buy_it/api-get-recentproducts.php',

@@ -47,6 +47,7 @@ import CheckOut from '../components/CheckOut';
 import login from '../components/login';
 import Signup from '../components/signup'
 import usernav from '../components/usernavigator/AdDrawerNavigator'
+import Allproduct from '../components/Allproduct'
 
 import {api} from '../components/constant';
 
@@ -354,6 +355,11 @@ const App = () => {
             name="CheckOut"
             component={CheckOut}
             options={options}
+          />
+          <Stack.Screen
+          name="Allproduct"
+          component={Allproduct}
+          options={options}
           />
           {/* <Stack.Screen
             name="ProductDetails"

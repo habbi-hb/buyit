@@ -674,6 +674,7 @@ const FeaturedSlider = () => {
   );
 };
 
+
 const RecommenderSlider = () => {
   let navigation = useNavigation();
   const screenHeight = Dimensions.get('window').height;

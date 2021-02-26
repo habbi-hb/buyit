@@ -136,7 +136,7 @@ let CategoriesList = ({route}) => {
       </Text>
 
       <View>
-        <FlatList
+      <FlatList
           data={data.Data}
           renderItem={({item}) => (
             // <Text style={styles.item} onPress={CategoriesTap}>
