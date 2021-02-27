@@ -36,7 +36,7 @@ import BottomAccount from './BottomAccount';
 
 const initialLayout = {width: Dimensions.get('window').width};
 const initialLayoutHeight = {width: Dimensions.get('window').height};
-const uniqueId = require("react-native-unique-id");
+
 
 const Header = () => {
   const refRBSheetBottom = useRef();
@@ -256,17 +256,19 @@ const Recents = () => {
             data={Recent.Data}
             renderItem={({item}) => {
               const AddToCart = (e) => {
-                let number = '1';
-
-                AsyncStorage.getItem('userData').then((result) => {
-                  console.log('result' + result);
-                  let user = JSON.parse(result);
-                  const uri =
-                    api.addcart +
-                    '&product_id=' +
-                    item.pro_id +
-                    '&quantity=1&user_id=' +
-                    user.user_id;
+                
+                // console.log("rrrrrrrrrrrrrrrrrrrrr", RandomNumber)
+                 
+  
+                  AsyncStorage.getItem('RandomNumber').then((result) => {
+                    console.log('result' + result);
+                    let user = JSON.parse(result);
+                    const uri =
+                      api.addcart +
+                      '&product_id=' +
+                      item.pro_id +
+                      '&quantity=1&user_id=' +
+                      user;
                   console.log(uri);
                   fetch(uri)
                     .then((response) => response.json())
@@ -284,6 +286,11 @@ const Recents = () => {
               };
               return (
                 <View>
+                  <TouchableOpacity 
+                    onPress={() =>
+                      navigation.navigate('ProductDetails', {id: item.pro_id, pic: featuredslider + item.image_name })
+                    }>
+                  
                   <Image
                     source={{uri: featuredslider + item.image_name}}
                     style={{width: 180, height: 150}}
@@ -300,6 +307,7 @@ const Recents = () => {
                   <Paragraph style={{marginLeft: 20}}>
                     {item.pro_name}
                   </Paragraph>
+                  </TouchableOpacity>
                   <Paragraph
                     style={{
                       marginLeft: 20,
@@ -466,17 +474,19 @@ const FeaturedSlider = () => {
             data={featured.Data}
             renderItem={({item}) => {
               const AddToCart = (e) => {
-                let number = '1';
-
-                AsyncStorage.getItem('userData').then((result) => {
-                  console.log('result' + result);
-                  let user = JSON.parse(result);
-                  const uri =
-                    api.addcart +
-                    '&product_id=' +
-                    item.pro_id +
-                    '&quantity=1&user_id=' +
-                    user.user_id;
+                //var RandomNumber = Math.floor(Math.random() * 100) + 1 ;
+                // console.log("rrrrrrrrrrrrrrrrrrrrr", RandomNumber)
+                 
+  
+                  AsyncStorage.getItem('RandomNumber').then((result) => {
+                    console.log('result' + result);
+                    let user = JSON.parse(result);
+                    const uri =
+                      api.addcart +
+                      '&product_id=' +
+                      item.pro_id +
+                      '&quantity=1&user_id=' +
+                      user;
                   console.log(uri);
                   fetch(uri)
                     .then((response) => response.json())
@@ -494,6 +504,10 @@ const FeaturedSlider = () => {
               };
               return (
                 <View>
+                  <TouchableOpacity 
+                    onPress={() =>
+                      navigation.navigate('ProductDetails', {id: item.pro_id, pic: featuredslider + item.image_name })
+                    }>
                   <Image
                     source={{uri: featuredslider + item.image_name}}
                     style={{width: 180, height: 150}}
@@ -510,6 +524,7 @@ const FeaturedSlider = () => {
                   <Paragraph style={{marginLeft: 20}}>
                     {item.pro_name}
                   </Paragraph>
+                </TouchableOpacity>
                   <Paragraph
                     style={{
                       marginLeft: 20,
@@ -595,9 +610,13 @@ const BestSeller = () => {
             data={featured.Data}
             renderItem={({item}) => {
               const AddToCart = (e) => {
-                let number = '1';
+                
+               // var RandomNumber = Math.floor(Math.random() * 100) + 1 ;
+              // console.log("rrrrrrrrrrrrrrrrrrrrr", RandomNumber)
+              var RandomNumber = Math.floor(Math.random() * 100000) + 1 ;
+              AsyncStorage.setItem('RandomNumber', JSON.stringify(RandomNumber))
 
-                AsyncStorage.getItem('userData').then((result) => {
+                AsyncStorage.getItem('RandomNumber').then((result) => {
                   console.log('result' + result);
                   let user = JSON.parse(result);
                   const uri =
@@ -605,7 +624,7 @@ const BestSeller = () => {
                     '&product_id=' +
                     item.pro_id +
                     '&quantity=1&user_id=' +
-                    user.user_id;
+                    user;
                   console.log(uri);
                   fetch(uri)
                     .then((response) => response.json())
@@ -623,6 +642,10 @@ const BestSeller = () => {
               };
               return (
                 <View>
+                  <TouchableOpacity 
+                    onPress={() =>
+                      navigation.navigate('ProductDetails', {id: item.pro_id, pic: featuredslider + item.image_name })
+                    }>
                   <Image
                     source={{uri: featuredslider + item.image_name}}
                     style={{width: 180, height: 150}}
@@ -638,7 +661,7 @@ const BestSeller = () => {
                   </Paragraph>
                   <Paragraph style={{marginLeft: 20}}>
                     {item.pro_name}
-                  </Paragraph>
+                  </Paragraph></TouchableOpacity>
                   <Paragraph
                     style={{
                       marginLeft: 20,
@@ -725,9 +748,11 @@ const RecommenderSlider = () => {
             data={featured.Data}
             renderItem={({item}) => {
               const AddToCart = (e) => {
-                let number = '1';
+                 //   var RandomNumber = Math.floor(Math.random() * 100) + 1 ;
+              // console.log("rrrrrrrrrrrrrrrrrrrrr", RandomNumber)
+               
 
-                AsyncStorage.getItem('userData').then((result) => {
+                AsyncStorage.getItem('RandomNumber').then((result) => {
                   console.log('result' + result);
                   let user = JSON.parse(result);
                   const uri =
@@ -735,7 +760,7 @@ const RecommenderSlider = () => {
                     '&product_id=' +
                     item.pro_id +
                     '&quantity=1&user_id=' +
-                    user.user_id;
+                    user; RandomNumber
                   console.log(uri);
                   fetch(uri)
                     .then((response) => response.json())
@@ -753,6 +778,10 @@ const RecommenderSlider = () => {
               };
               return (
                 <View>
+                   <TouchableOpacity 
+                    onPress={() =>
+                      navigation.navigate('ProductDetails', {id: item.pro_id, pic: featuredslider + item.image_name })
+                    }>
                   <Image
                     source={{uri: featuredslider + item.image_name}}
                     style={{width: 180, height: 150}}
@@ -769,6 +798,7 @@ const RecommenderSlider = () => {
                   <Paragraph style={{marginLeft: 20}}>
                     {item.pro_name}
                   </Paragraph>
+                  </TouchableOpacity>
                   <Paragraph
                     style={{
                       marginLeft: 20,

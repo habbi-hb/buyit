@@ -145,7 +145,7 @@ const App = () => {
           </TouchableOpacity>
         </View>
         <View style={{borderBottomWidth: 1, borderBottomColor: 'grey'}}>
-          <TouchableOpacity onPress={() => navigation.navigate('ShopScreen')}>
+          <TouchableOpacity onPress={() => navigation.navigate('Allproduct')}>
             <Text style={{color: '#adadad', padding: 10}}>SHOP</Text>
           </TouchableOpacity>
         </View>
@@ -361,11 +361,11 @@ const App = () => {
           component={Allproduct}
           options={options}
           />
-          {/* <Stack.Screen
+           <Stack.Screen
             name="ProductDetails"
             component={ProductDetails}
             options={options}
-          /> */}
+          /> 
         </Stack.Navigator>
       </NavigationContainer>
     </>

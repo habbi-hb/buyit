@@ -158,6 +158,7 @@ const Allproduct = () => {
     const [isLoading, setLoading] = useState(true);
     const [Allproduct, setAllproduct] = useState([]);
     const [cart, setCart] = useState([]);
+    
   
     useEffect(() => {
      
@@ -189,17 +190,19 @@ const Allproduct = () => {
               data={Allproduct.Data}
               renderItem={({item}) => {
                 const AddToCart = (e) => {
-                  let number = '1';
-  
-                  AsyncStorage.getItem('userData').then((result) => {
-                    console.log('result' + result);
-                    let user = JSON.parse(result);
-                    const uri =
-                      api.addcart +
-                      '&product_id=' +
-                      item.pro_id +
-                      '&quantity=1&user_id=' +
-                      user.user_id;
+                  var RandomNumber = Math.floor(Math.random() * 100) + 1 ;
+                  // console.log("rrrrrrrrrrrrrrrrrrrrr", RandomNumber)
+                    AsyncStorage.setItem('RandomNumber', JSON.stringify(RandomNumber))
+    
+                    AsyncStorage.getItem('RandomNumber').then((result) => {
+                      console.log('result' + result);
+                      let user = JSON.parse(result);
+                      const uri =
+                        api.addcart +
+                        '&product_id=' +
+                        item.pro_id +
+                        '&quantity=1&user_id=' +
+                        user;
                     console.log(uri);
                     fetch(uri)
                       .then((response) => response.json())
@@ -215,11 +218,17 @@ const Allproduct = () => {
                       .finally(() => setLoading(false));
                   });
                 };
+               
                 return (
-                  <View>
+                  
+                  <View style={{height: 250, width: "50%", }}>
+                     <TouchableOpacity 
+                    onPress={() =>
+                      navigation.navigate('ProductDetails', {id: item.pro_id, pic: featuredslider + item.image_name })
+                    }>
                     <Image
                       source={{uri: featuredslider + item.image_name}}
-                      style={{width: 180, height: 150}}
+                      style={{width: 120, height: 120, alignSelf:'center'}}
                       resizeMode="center"></Image>
   
                     <Paragraph
@@ -233,7 +242,7 @@ const Allproduct = () => {
                     </Paragraph>
                     <Paragraph style={{marginLeft: 20}}>
                       {item.pro_name}
-                    </Paragraph>
+                    </Paragraph></TouchableOpacity>
                     <Paragraph
                       style={{
                         marginLeft: 20,
@@ -285,13 +294,13 @@ const App = () => {
     <>
       <StatusBar barStyle="dark-content" />
       <Header />
-      <View style={{height: screenHeight}}>
+      <View style={{height: screenHeight, alignItems:'center' }}>
         <ScrollView style={{marginTop: 20, marginBottom: 100}}>
         
           
 
           <Text style={{fontSize: 20, fontWeight: 'bold', padding: 10, marginLeft: 10, color:'#5b5e5c'}}>
-            All Products
+            All Shops
           </Text>
          <Allproduct />
            

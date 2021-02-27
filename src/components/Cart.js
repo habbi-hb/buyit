@@ -1,4 +1,3 @@
-/* eslint-disable react-native/no-inline-styles */
 import React, {useEffect, useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {
@@ -101,10 +100,10 @@ let Login = () => {
   const [ifLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    AsyncStorage.getItem('userData').then((result) => {
+    AsyncStorage.getItem('RandomNumber').then((result) => {
       console.log('result' + result);
       let user = JSON.parse(result);
-      const uri = api.cartshow + user.user_id;
+      const uri = api.cartshow + user;
       console.log(uri);
       setIsLoading(true);
 

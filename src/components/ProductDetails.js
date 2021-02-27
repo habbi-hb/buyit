@@ -11,11 +11,13 @@ import {
   Image,
   ToastAndroid,
   Dimensions,
+  ScrollView,
   ActivityIndicator,
 } from 'react-native';
+import {Avatar , Paragraph} from 'react-native-paper';
 import {colors, images} from './constant';
 import Feather from 'react-native-vector-icons/Feather';
-import {api} from './constant';
+import {api, sliderpic, featuredslider} from './constant';
 import Entypo from 'react-native-vector-icons/Entypo';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 //import HeaderMain from './HeaderMain';
@@ -25,13 +27,136 @@ import {Card, CardItem} from 'native-base';
 import {Icon} from 'react-native-elements';
 import ProductDetailComponent from './ProductDetailComponent';
 
+
+
+const RecommenderSlider = () => {
+  let navigation = useNavigation();
+  const screenHeight = Dimensions.get('window').height;
+  const screenWidth = Dimensions.get('window').width;
+  const [isLoading, setLoading] = useState(true);
+  const [featured, setFeatured] = useState([]);
+  const [ifLoading, setIsLoading] = useState(true);
+  const pic = sliderpic;
+  const [cart, setCart] = useState([]);
+  //console.log(featured.Data);
+
+  useEffect(() => {
+    setIsLoading(true);
+    fetch(api.recommendslider)
+      .then((response) => response.json())
+      .then((json) => {
+        setFeatured(json);
+        setIsLoading(false);
+      })
+      .catch((error) => console.error(error))
+      .finally(() => setLoading(false));
+  }, []);
+  if (ifLoading) {
+    return (
+      <View style={{paddingTop: 100}}>
+        <ActivityIndicator size="large" color="black" />
+      </View>
+    );
+  }
+
+  return (
+ 
+          <FlatList
+            horizontal
+            data={featured.Data}
+            renderItem={({item}) => {
+              const AddToCart = (e) => {
+                let number = '1';
+
+                AsyncStorage.getItem('userData').then((result) => {
+                  console.log('result' + result);
+                  let user = JSON.parse(result);
+                  const uri =
+                    api.addcart +
+                    '&product_id=' +
+                    item.pro_id +
+                    '&quantity=1&user_id=' +
+                    user.user_id;
+                  console.log(uri);
+                  fetch(uri)
+                    .then((response) => response.json())
+                    .then((json) => {
+                      setCart(json);
+                      // console.log(cart);
+                      ToastAndroid.show(
+                        'Item Added To Cart',
+                        ToastAndroid.SHORT,
+                      );
+                    })
+                    .catch((error) => console.error(error))
+                    .finally(() => setLoading(false));
+                });
+              };
+              return (
+                <View style={{ margin: 20, width: 20}}>
+                   <TouchableOpacity 
+                    onPress={() =>
+                      navigation.navigate('ProductDetails', {id: item.pro_id, pic: featuredslider + item.image_name })
+                    }>
+                  <Image
+                    source={{uri: featuredslider + item.image_name}}
+                    style={{width: 120, height: 120, alignSelf:'center'}}
+                    resizeMode="center"></Image>
+
+                  <Paragraph
+                    style={{
+                      fontSize: 12,
+                      marginLeft: 20,
+                      color: colors.LIGHTGREY.DEFAULT,
+                    }}>
+                    Heavy
+                  </Paragraph>
+                  <Paragraph style={{marginLeft: 20}}>
+                    {item.pro_name}
+                  </Paragraph>
+                  </TouchableOpacity>
+                  <Paragraph
+                    style={{
+                      marginLeft: 20,
+                      fontSize: 14,
+                      color: colors.ORANGE.DEFAULT,
+                    }}>
+                    PKR {item.pro_price}
+                  </Paragraph>
+                  <TouchableOpacity
+                    style={{
+                      borderColor: colors.ORANGE.DEFAULT,
+                      width: '80%',
+                      borderWidth: 1,
+                      marginTop: 5,
+                      marginLeft: 20,
+                      marginRight: 20,
+                    }}
+                    onPress={AddToCart}>
+                    <Text
+                      style={{
+                        fontSize: 18,
+                        color: colors.ORANGE.DEFAULT,
+                        textAlign: 'center',
+                      }}>
+                      Add
+                    </Text>
+                  </TouchableOpacity>
+                </View>
+              );
+            }}
+          />
+   
+  );
+};
+
 const ProductDetails = ({route}) => {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
   const [usr, setUsr] = useState('');
   //const [Pid, setPid] = useState('');
   let Pid = '';
-  const {picture, pid} = route.params;
+  const {pic, id} = route.params;
   const [cart, setCart] = useState([]);
   const [ifLoading, setIsLoading] = useState(false);
   // let [quan, setQuan] = useState(num);
@@ -39,8 +164,8 @@ const ProductDetails = ({route}) => {
   //};
   useEffect(() => {
     setIsLoading(true);
-    const uri = api.productdetails + 'id=' + pid;
-    console.log(pid);
+    const uri = api.productdetails + 'id=' + id;
+    console.log("params",id);
     fetch(uri)
       .then((response) => response.json())
       .then((json) => {
@@ -52,7 +177,7 @@ const ProductDetails = ({route}) => {
       })
       .catch((error) => console.error(error))
       .finally(() => setLoading(false));
-  }, [pid]);
+  }, [id]);
 
   // const IncQuan = () => {
   //   setQuan(quan + 1);
@@ -80,9 +205,12 @@ const ProductDetails = ({route}) => {
     );
   }
   return (
-    <View
+    <ScrollView
       style={{
         flex: 1,
+        height: 1000,
+       marginTop: 5,
+         paddingBottom:20,
         backgroundColor: colors.WHITE,
       }}>
       <View>
@@ -90,7 +218,6 @@ const ProductDetails = ({route}) => {
           <View
             style={{
               width: '95%',
-              height: 90,
               alignItems: 'center',
               flexDirection: 'row',
               alignSelf: 'center',
@@ -99,7 +226,7 @@ const ProductDetails = ({route}) => {
               <Entypo
                 name="menu"
                 size={30}
-                onPress={() => navigation.openDrawer}
+                onPress={() => navigation.openDrawer()}
               />
             </TouchableOpacity>
             <Image source={images.logo} style={{height: 30, width: '30%'}} />
@@ -170,12 +297,12 @@ const ProductDetails = ({route}) => {
                 flex: 1,
                 width: Dimensions.get('window').width,
               }}>
-              <TouchableOpacity>
-                <Card
+              
+                <View
                   style={{
                     marginTop: 10,
                     width: Dimensions.get('window').width,
-                    height: Dimensions.get('window').height,
+                   
                     alignItems: 'center',
                   }}>
                   <CardItem>
@@ -196,7 +323,7 @@ const ProductDetails = ({route}) => {
                         }}
                         // onPress={() => navigation.navigate('HomeScreen')}
                         source={{
-                          uri: picture,
+                          uri: pic,
                         }}
                       />
                     </View>
@@ -265,13 +392,19 @@ const ProductDetails = ({route}) => {
                       </View>
                     </View>
                   </CardItem>
-                </Card>
-              </TouchableOpacity>
+                </View>
+             
             </View>
           );
         }}
       />
-    </View>
+           <Text style={{fontSize: 20, fontWeight: 'bold', padding: 10, marginLeft: 10, color:'#5b5e5c'}}>
+            Recommended Products
+          </Text>
+      <RecommenderSlider />
+      
+      
+    </ScrollView>
   );
 };
 export default ProductDetails;
