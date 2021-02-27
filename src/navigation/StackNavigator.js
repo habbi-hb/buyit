@@ -11,7 +11,9 @@ import {
   TextInput,
   Alert,
   ActivityIndicator,
+
 } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 import {useNavigation} from '@react-navigation/native';
 // import {TextInput} from 'react-native-gesture-handler';
 import {CheckBox,Icon} from 'native-base';
@@ -54,6 +56,9 @@ import {api} from '../components/constant';
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 const initialLayout = {width: Dimensions.get('window').width};
+const RandomNumber = Math.floor(Math.random() * 10000000) + 1 ;
+  AsyncStorage.setItem('RandomNumber', JSON.stringify(RandomNumber));
+
 
 const App = () => {
   let options = {

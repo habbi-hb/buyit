@@ -16,15 +16,22 @@ import {Icon} from 'react-native-elements';
 import {api} from './constant';
 import AsyncStorage from '@react-native-community/async-storage';
 import Loader from "./Loader";
+import { Checkbox } from 'react-native-paper';
 
 function login() {
+  
   let navigation = useNavigation();
+  const [Checkbox, setCheckBox] = useState(false);
   const [isLoading, setLoading] = useState(true);
   const [userInfo, setInfo] = useState([]);
   const [loader, setloader] = React.useState(true);
   const [usr, setUsr] = useState('');
   const [pwd, setPwd] = useState('');
   const [pop, setPop] = useState('');
+
+  const clickcheckbox = () => {
+    setCheckBox(true);
+  }
 
   const handleLoginTap = (e) => {
     setloader(true);
@@ -97,6 +104,7 @@ function login() {
       setloader(false);
     setPop('');
   };
+  
 
   return (
     <ScrollView>
@@ -123,6 +131,9 @@ function login() {
         <Text>Forgot Your Password?</Text>
         <View style={styles.chck}>
           <CheckBox
+            checked={Checkbox}
+          onPress={clickcheckbox}
+        
             tintColors={{true: '#F15927', false: 'black'}}
             style={{marginLeft: -10}}
           />

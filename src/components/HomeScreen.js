@@ -38,6 +38,8 @@ const initialLayout = {width: Dimensions.get('window').width};
 const initialLayoutHeight = {width: Dimensions.get('window').height};
 
 
+
+
 const Header = () => {
   const refRBSheetBottom = useRef();
   const [modalVisible, setModalVisible] = useState(false);
@@ -63,7 +65,8 @@ const Header = () => {
       .finally(() => setLoading(false));
   }, [tex, pwd]);
   useEffect(() => {
-    //AsyncStorage.getItem('userId').then((result) => console.log(result));
+     
+    AsyncStorage.getItem('RandomNumber').then((result) => console.log("our main randum number.........................."+result));
     // async () => {
     //   const userData = await AsyncStorage.getItem('userData');
     //   console.log('data', JSON.parse(userData));
@@ -257,18 +260,14 @@ const Recents = () => {
             renderItem={({item}) => {
               const AddToCart = (e) => {
                 
-                // console.log("rrrrrrrrrrrrrrrrrrrrr", RandomNumber)
-                 
-  
-                  AsyncStorage.getItem('RandomNumber').then((result) => {
-                    console.log('result' + result);
-                    let user = JSON.parse(result);
-                    const uri =
-                      api.addcart +
-                      '&product_id=' +
-                      item.pro_id +
-                      '&quantity=1&user_id=' +
-                      user;
+                AsyncStorage.getItem('RandomNumber').then((result) => {
+                  console.log('result' + result);
+                  let user = JSON.parse(result);
+                  const uri =
+                    api.addcart +
+                    '&product_id=' +
+                    item.pro_id +
+                    '&quantity=1&user_id=' + user;
                   console.log(uri);
                   fetch(uri)
                     .then((response) => response.json())
@@ -474,19 +473,16 @@ const FeaturedSlider = () => {
             data={featured.Data}
             renderItem={({item}) => {
               const AddToCart = (e) => {
-                //var RandomNumber = Math.floor(Math.random() * 100) + 1 ;
-                // console.log("rrrrrrrrrrrrrrrrrrrrr", RandomNumber)
+               
                  
-  
-                  AsyncStorage.getItem('RandomNumber').then((result) => {
-                    console.log('result' + result);
-                    let user = JSON.parse(result);
-                    const uri =
-                      api.addcart +
-                      '&product_id=' +
-                      item.pro_id +
-                      '&quantity=1&user_id=' +
-                      user;
+                AsyncStorage.getItem('RandomNumber').then((result) => {
+                  console.log('result' + result);
+                  let user = JSON.parse(result);
+                  const uri =
+                    api.addcart +
+                    '&product_id=' +
+                    item.pro_id +
+                    '&quantity=1&user_id=' + user;
                   console.log(uri);
                   fetch(uri)
                     .then((response) => response.json())
@@ -611,11 +607,8 @@ const BestSeller = () => {
             renderItem={({item}) => {
               const AddToCart = (e) => {
                 
-               // var RandomNumber = Math.floor(Math.random() * 100) + 1 ;
-              // console.log("rrrrrrrrrrrrrrrrrrrrr", RandomNumber)
-              var RandomNumber = Math.floor(Math.random() * 100000) + 1 ;
-              AsyncStorage.setItem('RandomNumber', JSON.stringify(RandomNumber))
-
+           
+              
                 AsyncStorage.getItem('RandomNumber').then((result) => {
                   console.log('result' + result);
                   let user = JSON.parse(result);
@@ -623,8 +616,7 @@ const BestSeller = () => {
                     api.addcart +
                     '&product_id=' +
                     item.pro_id +
-                    '&quantity=1&user_id=' +
-                    user;
+                    '&quantity=1&user_id=' + user;
                   console.log(uri);
                   fetch(uri)
                     .then((response) => response.json())
@@ -748,10 +740,6 @@ const RecommenderSlider = () => {
             data={featured.Data}
             renderItem={({item}) => {
               const AddToCart = (e) => {
-                 //   var RandomNumber = Math.floor(Math.random() * 100) + 1 ;
-              // console.log("rrrrrrrrrrrrrrrrrrrrr", RandomNumber)
-               
-
                 AsyncStorage.getItem('RandomNumber').then((result) => {
                   console.log('result' + result);
                   let user = JSON.parse(result);
@@ -759,8 +747,7 @@ const RecommenderSlider = () => {
                     api.addcart +
                     '&product_id=' +
                     item.pro_id +
-                    '&quantity=1&user_id=' +
-                    user; RandomNumber
+                    '&quantity=1&user_id=' + user;
                   console.log(uri);
                   fetch(uri)
                     .then((response) => response.json())

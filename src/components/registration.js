@@ -16,6 +16,7 @@ import {CheckBox} from 'native-base';
 import {TabView, SceneMap} from 'react-native-tab-view';
 const initialLayout = {width: Dimensions.get('window').width};
 const Reg = () => {
+  
   function login() {
     const [text, setText] = useState(' ');
     return (
@@ -101,6 +102,7 @@ const Reg = () => {
       </ScrollView>
     );
   }
+ 
 
   function signup() {
     return (

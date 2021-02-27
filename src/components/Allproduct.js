@@ -190,19 +190,17 @@ const Allproduct = () => {
               data={Allproduct.Data}
               renderItem={({item}) => {
                 const AddToCart = (e) => {
-                  var RandomNumber = Math.floor(Math.random() * 100) + 1 ;
-                  // console.log("rrrrrrrrrrrrrrrrrrrrr", RandomNumber)
-                    AsyncStorage.setItem('RandomNumber', JSON.stringify(RandomNumber))
-    
-                    AsyncStorage.getItem('RandomNumber').then((result) => {
-                      console.log('result' + result);
-                      let user = JSON.parse(result);
-                      const uri =
-                        api.addcart +
-                        '&product_id=' +
-                        item.pro_id +
-                        '&quantity=1&user_id=' +
-                        user;
+                  let number = '1';
+  
+                  AsyncStorage.getItem('RandomNumber').then((result) => {
+                    console.log('result' + result);
+                    let user = JSON.parse(result);
+                    const uri =
+                      api.addcart +
+                      '&product_id=' +
+                      item.pro_id +
+                      '&quantity=1&user_id=' + user;
+                      
                     console.log(uri);
                     fetch(uri)
                       .then((response) => response.json())

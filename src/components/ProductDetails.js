@@ -93,7 +93,7 @@ const RecommenderSlider = () => {
                 });
               };
               return (
-                <View style={{ margin: 20, width: 20}}>
+                <View style={{ margin: 20, width: 200}}>
                    <TouchableOpacity 
                     onPress={() =>
                       navigation.navigate('ProductDetails', {id: item.pro_id, pic: featuredslider + item.image_name })
@@ -159,7 +159,7 @@ const ProductDetails = ({route}) => {
   const {pic, id} = route.params;
   const [cart, setCart] = useState([]);
   const [ifLoading, setIsLoading] = useState(false);
-  // let [quan, setQuan] = useState(num);
+   let [quan, setQuan] = useState(0);
 
   //};
   useEffect(() => {
@@ -179,19 +179,19 @@ const ProductDetails = ({route}) => {
       .finally(() => setLoading(false));
   }, [id]);
 
-  // const IncQuan = () => {
-  //   setQuan(quan + 1);
-  //   console.log(quan);
-  // };
-  // const DecQuan = () => {
-  //   setQuan(quan - 1);
-  //   console.log(quan);
-  // };
+  const IncPro = () => {
+    setQuan(quan + 1);
+    console.log(quan);
+  };
+  const DecPro = () => {
+    setQuan(quan - 1);
+    console.log(quan);
+  };
 
   // const FinQuan = () => {
   //   ToastAndroid.show('Item Added To Cart', ToastAndroid.SHORT);
-  //   //setQuan(quan);
-  //   //console.log(quan);
+  //   setQuan(quan);
+  //   console.log(quan);
   // };
   //  let navigation = useNavigation();
 
@@ -267,15 +267,15 @@ const ProductDetails = ({route}) => {
             let number = '1';
             ToastAndroid.show('Item Added To Cart', ToastAndroid.SHORT);
 
-            AsyncStorage.getItem('userData').then((result) => {
-              console.log('result' + result);
-              let user = JSON.parse(result);
-              const uri =
-                api.addcart +
-                '&product_id=' +
-                item.pro_id +
-                '&quantity=1&user_id=' +
-                user.user_id;
+            
+              AsyncStorage.getItem('RandomNumber').then((result) => {
+                console.log('result' + result);
+                let user = JSON.parse(result);
+                const uri =
+                  api.addcart +
+                  '&product_id=' +
+                  item.pro_id +
+                  '&quantity=1&user_id=' + user;
               console.log(uri);
               fetch(uri)
                 .then((response) => response.json())
@@ -333,6 +333,8 @@ const ProductDetails = ({route}) => {
                       style={{
                         flex: 1,
                       }}>
+
+                   
                       <TouchableOpacity>
                         <View
                           style={{
@@ -349,9 +351,10 @@ const ProductDetails = ({route}) => {
                       </TouchableOpacity>
                       <View style={styles.logins}>
                         <View
-                          style={{flexDirection: 'row', alignItems: 'center'}}>
-                          <TouchableOpacity>
-                            {/* onPress={() => DecQuan()}> */}
+                          style={{flexDirection: 'row', alignItems: 'center' ,height: 60}}>
+                            
+                          <TouchableOpacity
+                            onPress={() => DecPro()}>
                             <Icon
                               name="minus"
                               type="font-awesome"
@@ -360,8 +363,8 @@ const ProductDetails = ({route}) => {
                             />
                           </TouchableOpacity>
                           <Text style={styles.btns}></Text>
-                          <TouchableOpacity>
-                            {/* onPress={() => IncQuan()} */}
+                          <TouchableOpacity
+                            onPress={() => IncPro()}>
                             <Icon
                               name="plus"
                               type="font-awesome"
@@ -370,6 +373,7 @@ const ProductDetails = ({route}) => {
                             />
                           </TouchableOpacity>
                         </View>
+                        {quan>0?
                         <TouchableOpacity
                           style={styles.login}
                           onPress={AddToCarrt}>
@@ -382,7 +386,7 @@ const ProductDetails = ({route}) => {
                             }}>
                             ADD
                           </Text>
-                        </TouchableOpacity>
+                        </TouchableOpacity>: <Text style={{alignSelf:'center'}}></Text>}
                       </View>
                       <View>
                         <Text style={{fontWeight: 'bold'}}>Details</Text>
