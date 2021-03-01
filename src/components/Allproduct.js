@@ -197,9 +197,11 @@ const Allproduct = () => {
                     let user = JSON.parse(result);
                     const uri =
                       api.addcart +
+                      '&guest_id=' +
+                       user +
                       '&product_id=' +
                       item.pro_id +
-                      '&quantity=1&user_id=' + user;
+                      '&quantity=1&user_id=' + 0;
                       
                     console.log(uri);
                     fetch(uri)

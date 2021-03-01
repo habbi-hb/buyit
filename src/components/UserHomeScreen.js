@@ -36,7 +36,9 @@ import BottomAccount from './BottomAccount';
 
 const initialLayout = {width: Dimensions.get('window').width};
 const initialLayoutHeight = {width: Dimensions.get('window').height};
-const uniqueId = require("react-native-unique-id");
+
+
+
 
 const Header = () => {
   const refRBSheetBottom = useRef();
@@ -63,7 +65,8 @@ const Header = () => {
       .finally(() => setLoading(false));
   }, [tex, pwd]);
   useEffect(() => {
-    //AsyncStorage.getItem('userId').then((result) => console.log(result));
+     
+    AsyncStorage.getItem('RandomNumber').then((result) => console.log("our main randum number.........................."+result));
     // async () => {
     //   const userData = await AsyncStorage.getItem('userData');
     //   console.log('data', JSON.parse(userData));
@@ -222,6 +225,7 @@ const Recents = () => {
   const [isLoading, setLoading] = useState(true);
   const [Recent, setRecent] = useState([]);
   const[ID, setID]=useState();
+  const [cart, setCart] = useState([]);
   
   
   
@@ -237,16 +241,7 @@ const Recents = () => {
       .catch((error) => console.error(error))
     
   }, []);
-  uniqueId()
-  .then(id => 
-    {console.log("uniqusdhjhjs id................:",id)
-  setID(id)}
-    )
-  .catch(error => console.error(error));
-  uniqueId((error, id) => {
-    if (error) return console.error(error);
-    console.log(id);
-  });
+ ;
 
 
   return (
@@ -264,17 +259,18 @@ const Recents = () => {
             data={Recent.Data}
             renderItem={({item}) => {
               const AddToCart = (e) => {
-                let number = '1';
-
-                AsyncStorage.getItem('userData').then((result) => {
+                
+                AsyncStorage.getItem('RandomNumber').then((result) => {
                   console.log('result' + result);
                   let user = JSON.parse(result);
                   const uri =
                     api.addcart +
+                    '&guest_id=' +
+                     user +
                     '&product_id=' +
                     item.pro_id +
-                    '&quantity=1&user_id=' +
-                    user.user_id;
+                    '&quantity=1&user_id=' + 0;
+                    
                   console.log(uri);
                   fetch(uri)
                     .then((response) => response.json())
@@ -292,6 +288,11 @@ const Recents = () => {
               };
               return (
                 <View>
+                  <TouchableOpacity 
+                    onPress={() =>
+                      navigation.navigate('ProductDetails', {id: item.pro_id, pic: featuredslider + item.image_name })
+                    }>
+                  
                   <Image
                     source={{uri: featuredslider + item.image_name}}
                     style={{width: 180, height: 150}}
@@ -308,125 +309,7 @@ const Recents = () => {
                   <Paragraph style={{marginLeft: 20}}>
                     {item.pro_name}
                   </Paragraph>
-                  <Paragraph
-                    style={{
-                      marginLeft: 20,
-                      fontSize: 14,
-                      color: colors.ORANGE.DEFAULT,
-                    }}>
-                    PKR {item.pro_price}
-                  </Paragraph>
-                  <TouchableOpacity
-                    style={{
-                      borderColor: colors.ORANGE.DEFAULT,
-                      width: '80%',
-                      borderWidth: 1,
-                      marginTop: 5,
-                      marginLeft: 20,
-                      marginRight: 20,
-                    }}
-                    onPress={AddToCart}>
-                    <Text
-                      style={{
-                        fontSize: 18,
-                        color: colors.ORANGE.DEFAULT,
-                        textAlign: 'center',
-                      }}>
-                      Add
-                    </Text>
                   </TouchableOpacity>
-                </View>
-              );
-            }}
-          />
-             
-        
-      </View>
-    </View>
-  );
-};
-
-const Allproduct = () => {
-  let navigation = useNavigation();
-  const screenHeight = Dimensions.get('window').height;
-  const screenWidth = Dimensions.get('window').width;
-  const [isLoading, setLoading] = useState(true);
-  const [Allproduct, setAllproduct] = useState([]);
-
-  useEffect(() => {
-   
-    fetch(api.Recent)
-      .then((response) => response.json())
-      .then((json) => {
-        setAllproduct(json);
-    
-      })
-      .catch((error) => console.error(error))
-    
-  }, []);
-
-
-  return (
-    <View>
-      <View
-        style={{
-          justifyContent: 'center',
-
-          flex: 1,
-
-          marginTop: 0,
-        }}>
-         <FlatList
-       key={'_'}
-       numColumns={2}
-            data={Allproduct.Data}
-            renderItem={({item}) => {
-              const AddToCart = (e) => {
-                let number = '1';
-
-                AsyncStorage.getItem('userData').then((result) => {
-                  console.log('result' + result);
-                  let user = JSON.parse(result);
-                  const uri =
-                    api.addcart +
-                    '&product_id=' +
-                    item.pro_id +
-                    '&quantity=1&user_id=' +
-                    user.user_id;
-                  console.log(uri);
-                  fetch(uri)
-                    .then((response) => response.json())
-                    .then((json) => {
-                      setCart(json);
-                      // console.log(cart);
-                      ToastAndroid.show(
-                        'Item Added To Cart',
-                        ToastAndroid.SHORT,
-                      );
-                    })
-                    .catch((error) => console.error(error))
-                    .finally(() => setLoading(false));
-                });
-              };
-              return (
-                <View>
-                  <Image
-                    source={{uri: featuredslider + item.image_name}}
-                    style={{width: 180, height: 150}}
-                    resizeMode="center"></Image>
-
-                  <Paragraph
-                    style={{
-                      fontSize: 12,
-                      marginLeft: 20,
-                      color: colors.LIGHTGREY.DEFAULT,
-                    }}>
-                      {item.pro_des}
-                  
-                  </Paragraph>
-                  <Paragraph style={{marginLeft: 20}}>
-                    {item.pro_name}
-                  </Paragraph>
                   <Paragraph
                     style={{
                       marginLeft: 20,
@@ -593,17 +476,19 @@ const FeaturedSlider = () => {
             data={featured.Data}
             renderItem={({item}) => {
               const AddToCart = (e) => {
-                let number = '1';
-
-                AsyncStorage.getItem('userData').then((result) => {
+               
+                 
+                AsyncStorage.getItem('RandomNumber').then((result) => {
                   console.log('result' + result);
                   let user = JSON.parse(result);
                   const uri =
                     api.addcart +
+                    '&guest_id=' +
+                     user +
                     '&product_id=' +
                     item.pro_id +
-                    '&quantity=1&user_id=' +
-                    user.user_id;
+                    '&quantity=1&user_id=' + 0;
+                    
                   console.log(uri);
                   fetch(uri)
                     .then((response) => response.json())
@@ -621,6 +506,10 @@ const FeaturedSlider = () => {
               };
               return (
                 <View>
+                  <TouchableOpacity 
+                    onPress={() =>
+                      navigation.navigate('ProductDetails', {id: item.pro_id, pic: featuredslider + item.image_name })
+                    }>
                   <Image
                     source={{uri: featuredslider + item.image_name}}
                     style={{width: 180, height: 150}}
@@ -632,11 +521,12 @@ const FeaturedSlider = () => {
                       marginLeft: 20,
                       color: colors.LIGHTGREY.DEFAULT,
                     }}>
-                   {item.pro_des}
+                   heavy
                   </Paragraph>
                   <Paragraph style={{marginLeft: 20}}>
                     {item.pro_name}
                   </Paragraph>
+                </TouchableOpacity>
                   <Paragraph
                     style={{
                       marginLeft: 20,
@@ -673,7 +563,142 @@ const FeaturedSlider = () => {
     </View>
   );
 };
+const BestSeller = () => {
+  let navigation = useNavigation();
+  const screenHeight = Dimensions.get('window').height;
+  const screenWidth = Dimensions.get('window').width;
+  const [isLoading, setLoading] = useState(true);
+  const [featured, setFeatured] = useState([]);
+  const [ifLoading, setIsLoading] = useState(true);
+  const pic = sliderpic;
+  const [cart, setCart] = useState([]);
+  //console.log(featured.Data);
 
+  useEffect(() => {
+    setIsLoading(true);
+    fetch(api.BestSeller)
+      .then((response) => response.json())
+      .then((json) => {
+        setFeatured(json);
+        setIsLoading(false);
+      })
+      .catch((error) => console.error(error))
+      .finally(() => setLoading(false));
+  }, []);
+  if (ifLoading) {
+    return (
+      <View style={{paddingTop: 100}}>
+        <ActivityIndicator size="large" color="black" />
+      </View>
+    );
+  }
+
+  return (
+    <View>
+      <View
+        style={{
+          justifyContent: 'center',
+
+          flex: 1,
+
+          marginTop: 0,
+        }}>
+        <ScrollView
+          style={{width: '100%'}}
+          horizontal={true}
+          showsHorizontalScrollIndicator={false}>
+          <FlatList
+            horizontal
+            data={featured.Data}
+            renderItem={({item}) => {
+              const AddToCart = (e) => {
+                
+           
+              
+                AsyncStorage.getItem('RandomNumber').then((result) => {
+                  console.log('result' + result);
+                  let user = JSON.parse(result);
+                  const uri =
+                    api.addcart +
+                    '&guest_id=' +
+                     user +
+                    '&product_id=' +
+                    item.pro_id +
+                    '&quantity=1&user_id=' + 0;
+                    
+                  console.log(uri);
+                  fetch(uri)
+                    .then((response) => response.json())
+                    .then((json) => {
+                      setCart(json);
+                      // console.log(cart);
+                      ToastAndroid.show(
+                        'Item Added To Cart',
+                        ToastAndroid.SHORT,
+                      );
+                    })
+                    .catch((error) => console.error(error))
+                    .finally(() => setLoading(false));
+                });
+              };
+              return (
+                <View>
+                  <TouchableOpacity 
+                    onPress={() =>
+                      navigation.navigate('ProductDetails', {id: item.pro_id, pic: featuredslider + item.image_name })
+                    }>
+                  <Image
+                    source={{uri: featuredslider + item.image_name}}
+                    style={{width: 180, height: 150}}
+                    resizeMode="center"></Image>
+
+                  <Paragraph
+                    style={{
+                      fontSize: 12,
+                      marginLeft: 20,
+                      color: colors.LIGHTGREY.DEFAULT,
+                    }}>
+                    Heavy
+                  </Paragraph>
+                  <Paragraph style={{marginLeft: 20}}>
+                    {item.pro_name}
+                  </Paragraph></TouchableOpacity>
+                  <Paragraph
+                    style={{
+                      marginLeft: 20,
+                      fontSize: 14,
+                      color: colors.ORANGE.DEFAULT,
+                    }}>
+                    PKR {item.pro_price}
+                  </Paragraph>
+                  <TouchableOpacity
+                    style={{
+                      borderColor: colors.ORANGE.DEFAULT,
+                      width: '80%',
+                      borderWidth: 1,
+                      marginTop: 5,
+                      marginLeft: 20,
+                      marginRight: 20,
+                    }}
+                    onPress={AddToCart}>
+                    <Text
+                      style={{
+                        fontSize: 18,
+                        color: colors.ORANGE.DEFAULT,
+                        textAlign: 'center',
+                      }}>
+                      Add
+                    </Text>
+                  </TouchableOpacity>
+                </View>
+              );
+            }}
+          />
+        </ScrollView>
+      </View>
+    </View>
+  );
+};
 
 const RecommenderSlider = () => {
   let navigation = useNavigation();
@@ -724,17 +749,17 @@ const RecommenderSlider = () => {
             data={featured.Data}
             renderItem={({item}) => {
               const AddToCart = (e) => {
-                let number = '1';
-
-                AsyncStorage.getItem('userData').then((result) => {
+                AsyncStorage.getItem('RandomNumber').then((result) => {
                   console.log('result' + result);
                   let user = JSON.parse(result);
                   const uri =
                     api.addcart +
+                    '&guest_id=' +
+                     user +
                     '&product_id=' +
                     item.pro_id +
-                    '&quantity=1&user_id=' +
-                    user.user_id;
+                    '&quantity=1&user_id=' + 0;
+                    
                   console.log(uri);
                   fetch(uri)
                     .then((response) => response.json())
@@ -752,6 +777,10 @@ const RecommenderSlider = () => {
               };
               return (
                 <View>
+                   <TouchableOpacity 
+                    onPress={() =>
+                      navigation.navigate('ProductDetails', {id: item.pro_id, pic: featuredslider + item.image_name })
+                    }>
                   <Image
                     source={{uri: featuredslider + item.image_name}}
                     style={{width: 180, height: 150}}
@@ -768,6 +797,7 @@ const RecommenderSlider = () => {
                   <Paragraph style={{marginLeft: 20}}>
                     {item.pro_name}
                   </Paragraph>
+                  </TouchableOpacity>
                   <Paragraph
                     style={{
                       marginLeft: 20,
@@ -806,6 +836,7 @@ const RecommenderSlider = () => {
 };
 
 const App = () => {
+    let navigation = useNavigation();
   //const {ch} = route.params;
   const screenHeight = Dimensions.get('window').height;
   return (
@@ -819,23 +850,45 @@ const App = () => {
             Shops
           </Text>
           <Shops />
-          <Text style={{fontSize: 22, fontWeight: 'bold', padding: 10, marginLeft: 10, color:'#5b5e5c'}}>
-            Featured Products
+          <Text style={{fontSize: 20, fontWeight: 'bold', padding: 10, marginLeft: 10, color:'#5b5e5c'}}>
+          Special offer
           </Text>
           <FeaturedSlider />
 
-          <Text style={{fontSize: 22, fontWeight: 'bold', padding: 10, marginLeft: 10, color:'#5b5e5c'}}>
+          <Text style={{fontSize: 20, fontWeight: 'bold', padding: 10, marginLeft: 10, color:'#5b5e5c'}}>
             Recommended Products
           </Text>
           <RecommenderSlider />
-          <Text style={{fontSize: 22, fontWeight: 'bold', padding: 10, marginLeft: 10, color:'#5b5e5c'}}>
+           <Text style={{fontSize: 20, fontWeight: 'bold', padding: 10, marginLeft: 10, color:'#5b5e5c'}}>
+          Best Seller
+          </Text>
+          <BestSeller />
+          <Text style={{fontSize: 20, fontWeight: 'bold', padding: 10, marginLeft: 10, color:'#5b5e5c'}}>
             Recents Products
           </Text>
           <Recents />
-          <Text style={{fontSize: 22, fontWeight: 'bold', padding: 10, marginLeft: 10, color:'#5b5e5c'}}>
-            All Products
-          </Text>
-          <Allproduct />
+       
+                  <TouchableOpacity
+                    style={{
+                      borderColor: colors.ORANGE.DEFAULT,
+                      width: '90%',
+                      padding: 10,
+                      borderWidth: 1,
+                      marginTop: 5,
+                      marginLeft: 20,
+                      marginRight: 20,
+                    }}
+                    onPress={() => navigation.navigate('Allproduct')}
+                    >
+                    <Text
+                      style={{
+                        fontSize: 18,
+                        color: colors.ORANGE.DEFAULT,
+                        textAlign: 'center',
+                      }}>
+                      Shop more
+                    </Text>
+                  </TouchableOpacity>
         </ScrollView>
       </View>
     </>

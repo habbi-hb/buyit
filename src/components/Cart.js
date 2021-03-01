@@ -289,7 +289,7 @@ let Login = () => {
                         marginTop: 10,
                         marginBottom: 20,
                       }}>
-                      PKR 700
+                      PKR {item.pro_price}
                     </Text>
                   </View>
                 </View>
@@ -344,7 +344,7 @@ let Login = () => {
                 Total :
               </Text>
               <Text style={{color: colors.ORANGE.DEFAULT, fontSize: 18}}>
-                PKR 4450
+                PKR {totalPrice}
               </Text>
             </View>
 

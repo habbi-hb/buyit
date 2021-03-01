@@ -265,9 +265,12 @@ const Recents = () => {
                   let user = JSON.parse(result);
                   const uri =
                     api.addcart +
+                    '&guest_id=' +
+                     user +
                     '&product_id=' +
                     item.pro_id +
-                    '&quantity=1&user_id=' + user;
+                    '&quantity=1&user_id=' + 0;
+                    
                   console.log(uri);
                   fetch(uri)
                     .then((response) => response.json())
@@ -480,9 +483,12 @@ const FeaturedSlider = () => {
                   let user = JSON.parse(result);
                   const uri =
                     api.addcart +
+                    '&guest_id=' +
+                     user +
                     '&product_id=' +
                     item.pro_id +
-                    '&quantity=1&user_id=' + user;
+                    '&quantity=1&user_id=' + 0;
+                    
                   console.log(uri);
                   fetch(uri)
                     .then((response) => response.json())
@@ -614,9 +620,12 @@ const BestSeller = () => {
                   let user = JSON.parse(result);
                   const uri =
                     api.addcart +
+                    '&guest_id=' +
+                     user +
                     '&product_id=' +
                     item.pro_id +
-                    '&quantity=1&user_id=' + user;
+                    '&quantity=1&user_id=' + 0;
+                    
                   console.log(uri);
                   fetch(uri)
                     .then((response) => response.json())
@@ -745,9 +754,12 @@ const RecommenderSlider = () => {
                   let user = JSON.parse(result);
                   const uri =
                     api.addcart +
+                    '&guest_id=' +
+                     user +
                     '&product_id=' +
                     item.pro_id +
-                    '&quantity=1&user_id=' + user;
+                    '&quantity=1&user_id=' + 0;
+                    
                   console.log(uri);
                   fetch(uri)
                     .then((response) => response.json())

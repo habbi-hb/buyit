@@ -68,15 +68,17 @@ const RecommenderSlider = () => {
               const AddToCart = (e) => {
                 let number = '1';
 
-                AsyncStorage.getItem('userData').then((result) => {
+                AsyncStorage.getItem('RandomNumber').then((result) => {
                   console.log('result' + result);
                   let user = JSON.parse(result);
                   const uri =
                     api.addcart +
+                    '&guest_id=' +
+                     user +
                     '&product_id=' +
                     item.pro_id +
-                    '&quantity=1&user_id=' +
-                    user.user_id;
+                    '&quantity=1&user_id=' + 0;
+                    
                   console.log(uri);
                   fetch(uri)
                     .then((response) => response.json())
@@ -362,7 +364,7 @@ const ProductDetails = ({route}) => {
                               color="orange"
                             />
                           </TouchableOpacity>
-                          <Text style={styles.btns}></Text>
+                          <Text style={styles.btns}>{quan}</Text>
                           <TouchableOpacity
                             onPress={() => IncPro()}>
                             <Icon
@@ -386,7 +388,29 @@ const ProductDetails = ({route}) => {
                             }}>
                             ADD
                           </Text>
-                        </TouchableOpacity>: <Text style={{alignSelf:'center'}}></Text>}
+                        </TouchableOpacity>: <View
+                          style={{
+                            paddingVertical: 10,
+                            display: 'flex',
+                            alignItems: 'center',
+                            borderWidth: 1,
+                            borderColor: '#ad7b21',
+                            backgroundColor: '#ad7b21',
+                            marginVertical: 10,
+                            borderRadius: 20,
+                            width: 100,
+                          }}
+                         >
+                          <Text
+                            style={{
+                              fontSize: 15,
+                              fontWeight: '500',
+                              alignContent: 'center',
+                              color: '#000',
+                            }}>
+                            ADD
+                          </Text>
+                        </View>}
                       </View>
                       <View>
                         <Text style={{fontWeight: 'bold'}}>Details</Text>
