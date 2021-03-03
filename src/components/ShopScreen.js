@@ -86,11 +86,11 @@ const RenderHeader = () => {
     </View>
   );
 };
-const ShopScreen = () => {
-  let navigation = useNavigation();
-  //const {sub_id} = route.params;
+const ShopScreen = ({navigation, route}) => {
+   navigation = useNavigation();
+  const {shop_id} = route.params;
   //const {cat} = route.params;
-  //console.log('params', sub_id);
+  console.log('params Shop id', shop_id);
   useEffect(() => {
     async () => {
       const userData = await AsyncStorage.getItem('userData');
@@ -119,7 +119,7 @@ const ShopScreen = () => {
       <ScrollView>
         <View style={{alignItems: 'center'}}>
           {/* <CardComponent subId={sub_id} cat={cat} /> */}
-          <ShopComponent />
+          <ShopComponent shopid={shop_id} />
         </View>
       </ScrollView>
     </View>

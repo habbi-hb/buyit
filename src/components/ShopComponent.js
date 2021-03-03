@@ -14,7 +14,8 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import {api, cardimage} from './constant';
-
+import {images, colors} from './constant';
+import { Title, Paragraph} from 'react-native-paper';
 // npm i native-base
 import {Card, CardItem} from 'native-base';
 import {Alert} from 'react-native';
@@ -31,11 +32,14 @@ const ShopComponent = (props) => {
   const [data, setData] = useState([]);
   const [cart, setCart] = useState([]);
   const [ifLoading, setIsLoading] = useState(false);
-
+console.log("props........."+props.shopids)
   useEffect(() => {
     setIsLoading(true);
 
-    const uri = api.shop;
+    const uri = 
+    api.probyshop +
+    '?id=' +
+    props.shopid;
     fetch(uri)
       .then((response) => response.json())
       .then((json) => {
@@ -44,7 +48,7 @@ const ShopComponent = (props) => {
       })
       .catch((error) => console.error(error))
       .finally(() => setLoading(false));
-  }, []);
+  }, [props.shopid]);
   let navigation = useNavigation();
   const pic = cardimage;
   if (ifLoading) {
@@ -86,87 +90,56 @@ const ShopComponent = (props) => {
         };
 
         return (
-          <View>
-            <Card
-              style={{
-                marginTop: 10,
-                width: Dimensions.get('window').width * 0.45,
-              }}>
-              <CardItem
-                style={{
-                  alignItems: 'center',
-                }}>
-                <View
-                  style={{
-                    width: Dimensions.get('window').width * 0.37,
-
-                    alignItems: 'center',
-                  }}>
-                  <Text
-                    style={{
-                      fontSize: 18,
-                      fontWeight: 'bold',
-                      marginBottom: 10,
-                    }}>
-                    {item.sub_catname}
-                  </Text>
-                  <TouchableOpacity
+          <View style={{height: 250, width: "50%", }}>
+                     <TouchableOpacity 
                     onPress={() =>
-                      navigation.navigate('ProductDetails', {
-                        picture: pic + item.image_name,
-                        pid: item.pro_id,
-                      })
+                      navigation.navigate('ProductDetails', {id: item.pro_id, pic: featuredslider + item.image_name })
                     }>
                     <Image
-                      style={{
-                        width: 100,
-                        height: 100,
-
-                        borderColor: 'black',
-                      }}
                       source={{uri: pic + item.image_name}}
-                    />
-                  </TouchableOpacity>
-                </View>
-              </CardItem>
-              <CardItem>
-                <View
-                  style={{
-                    flex: 1,
-
-                    // justifyContent: 'space-between'
-                  }}>
-                  <TouchableOpacity>
-                    <View
+                      style={{width: 120, height: 120, alignSelf:'center'}}
+                      resizeMode="center"></Image>
+  
+                    <Paragraph
                       style={{
-                        flexDirection: 'row',
-                        justifyContent: 'space-between',
+                        fontSize: 12,
+                        marginLeft: 20,
+                        color: colors.LIGHTGREY.DEFAULT,
                       }}>
-                      <Text>{item.pro_name}</Text>
-                      <Text>{item.pro_price}</Text>
-                    </View>
-                  </TouchableOpacity>
-                </View>
-              </CardItem>
-              <View
-                style={{
-                  flex: 1,
-                  alignItems: 'center',
-                }}>
-                <TouchableOpacity onPress={AddToCart} style={styles.login}>
-                  <Text
-                    style={{
-                      fontSize: 20,
-                      fontWeight: '500',
-                      alignContent: 'center',
-                      color: '#000',
-                    }}>
-                    ADD
-                  </Text>
-                </TouchableOpacity>
-              </View>
-            </Card>
-          </View>
+                        {item.pro_des}
+                    
+                    </Paragraph>
+                    <Paragraph style={{marginLeft: 20}}>
+                      {item.pro_name}
+                    </Paragraph></TouchableOpacity>
+                    <Paragraph
+                      style={{
+                        marginLeft: 20,
+                        fontSize: 14,
+                        color: colors.ORANGE.DEFAULT,
+                      }}>
+                      PKR {item.pro_price}
+                    </Paragraph>
+                    <TouchableOpacity
+                      style={{
+                        borderColor: colors.ORANGE.DEFAULT,
+                        width: '80%',
+                        borderWidth: 1,
+                        marginTop: 5,
+                        marginLeft: 20,
+                        marginRight: 20,
+                      }}
+                      onPress={AddToCart}>
+                      <Text
+                        style={{
+                          fontSize: 18,
+                          color: colors.ORANGE.DEFAULT,
+                          textAlign: 'center',
+                        }}>
+                        Add
+                      </Text>
+                    </TouchableOpacity>
+                  </View>
         );
       }}
     />
@@ -175,20 +148,21 @@ const ShopComponent = (props) => {
 export default ShopComponent;
 
 const styles = StyleSheet.create({
-  subheading: {
-    fontSize: 20,
-    fontWeight: '900',
-    color: '#fff',
+  container: {marginTop: '7%'},
+  text: {fontSize: 20, fontWeight: 'bold', color: 'white'},
+  containerr: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
-  cardHeader: {
-    backgroundColor: '#6a90eb',
-  },
-  footer: {
-    width: '100%',
-    paddingVertical: 4,
+  screen: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
+  },
+  font: {
+    fontSize: 30,
+    fontWeight: 'bold',
   },
   login: {
     paddingVertical: 10,
@@ -196,9 +170,85 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderWidth: 1,
     borderColor: 'orange',
-    backgroundColor: 'orange',
     marginVertical: 10,
-    borderRadius: 20,
-    width: 100,
   },
+  logins: {
+    paddingVertical: 10,
+    display: 'flex',
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: '#d3d3d3',
+    marginVertical: 10,
+  },
+  form: {
+    flexDirection: 'column',
+    margin: 20,
+  },
+  btns: {
+    fontSize: 20,
+    color: 'orange',
+    marginRight: 15,
+  },
+  btn: {
+    fontSize: 20,
+    fontWeight: '500',
+    marginLeft: 5,
+    color: '#808080',
+  },
+  textb: {
+    width: '100%',
+    height: 44,
+    backgroundColor: '#d3d3d3',
+    paddingHorizontal: 10,
+    paddingVertical: 10,
+    marginVertical: 13,
+  },
+  textbb: {
+    margin: 15,
+  },
+  chck: {
+    flexDirection: 'row',
+  },
+  submit: {
+    marginRight: 40,
+    marginLeft: 40,
+    marginTop: 10,
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: 'center',
+    flexDirection: 'column',
+    alignItems: 'center',
+    marginTop: 10,
+  },
+  modalView: {
+    backgroundColor: 'white',
+    borderRadius: 20,
+    padding: 50,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
+  openButton: {
+    backgroundColor: '#F194FF',
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2,
+  },
+  textStyle: {
+    color: 'white',
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: 'center',
+  },
+ 
 });

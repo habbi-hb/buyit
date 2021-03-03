@@ -50,6 +50,8 @@ import login from '../components/login';
 import Signup from '../components/signup'
 import usernav from '../components/usernavigator/AdDrawerNavigator'
 import Allproduct from '../components/Allproduct'
+import Searchproduct from '../components/Searchproduct'
+import userdashboard from '../components/userdashboard'
 
 import {api} from '../components/constant';
 
@@ -58,16 +60,51 @@ const Drawer = createDrawerNavigator();
 const initialLayout = {width: Dimensions.get('window').width};
 const RandomNumber = Math.floor(Math.random() * 10000000) + 1 ;
   AsyncStorage.setItem('RandomNumber', JSON.stringify(RandomNumber));
+  const Searchbar =() => {
+    const [search, setSearch] = useState('');
+   // console.log("search state........."+ search)
+    const navigation = useNavigation();
+    return (
+      <View style={styles.row}>
+      <View style={styles.inputsrch}>
+        <TextInput 
+        value={search}
+        onChangeText={(text)=>setSearch(text)}
+        style={styles.inputsearch}
+         placeholderTextColor={'#adadad'} placeholder='Search in....' />
+      </View>
+
+      <View style={styles.inputbtn}>
+        <TouchableOpacity
+           onPress={() => { 
+                     navigation.navigate('Searchproduct', {
+                    shop_id: search,
+                    abc:99
+                  });
+                }}
+         style={{alignItems:'center', justifyContent:'center' , flex:1}}>
+        <Icon style={{color:'#fff', fontSize: 25 }} active name="search1" type="AntDesign" />
+        </TouchableOpacity>
+      </View>
+    </View>
+
+    );
+    
+  }
 
 
 const App = () => {
+ // const navigation = props.navigation
   let options = {
     headerShown: false,
   };
   const [navprop, setNavProp] = useState([]);
   const [check, setcheck] = useState('false');
+
+  
+  
   const Tab = createMaterialTopTabNavigator();
-  // const navigation = useNavigation();
+ 
   // console.log(navigation);
   function CustomDrawerContent(props) {
     // if (setcheck === 'false') {
@@ -105,17 +142,8 @@ const App = () => {
             />
           </TouchableOpacity>
         </View>
-        <View style={styles.row}>
-          <View style={styles.inputsrch}>
-            <TextInput style={styles.inputsearch} placeholderTextColor={'#adadad'} placeholder='Search in....' />
-          </View>
-
-          <View style={styles.inputbtn}>
-            <TouchableOpacity style={{alignItems:'center', justifyContent:'center' , flex:1}}>
-            <Icon style={{color:'#fff', fontSize: 25 }} active name="search1" type="AntDesign" />
-            </TouchableOpacity>
-          </View>
-        </View>
+        <Searchbar />
+       
         <View>
           <TabView
             navigationState={{index, routes}}
@@ -369,6 +397,16 @@ const App = () => {
            <Stack.Screen
             name="ProductDetails"
             component={ProductDetails}
+            options={options}
+          /> 
+           <Stack.Screen
+            name="Searchproduct"
+            component={Searchproduct}
+            options={options}
+          /> 
+           <Stack.Screen
+            name="Userdashboard"
+            component={userdashboard}
             options={options}
           /> 
         </Stack.Navigator>

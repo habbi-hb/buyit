@@ -65,6 +65,12 @@ export default function DrawerContent(props) {
 
     return (
       <ScrollView>
+          <View style={{borderBottomWidth: 1, borderBottomColor: 'grey'}}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('Userdashboard',)}>
+            <Text style={{color: '#adadad', padding: 10}}>Dashboard</Text>
+          </TouchableOpacity>
+        </View>
         <View style={{borderBottomWidth: 1, borderBottomColor: 'grey'}}>
           <TouchableOpacity
             onPress={() => navigation.navigate('HomeScreen2', {ch: check})}>
@@ -87,11 +93,7 @@ export default function DrawerContent(props) {
             <Text style={{color: '#adadad', padding: 10}}>WISHLIST</Text>
           </TouchableOpacity>
         </View>
-        <View style={{borderBottomWidth: 1, borderBottomColor: 'grey'}}>
-          <TouchableOpacity onPress={() => navigation.navigate('MyProfile')}>
-            <Text style={{color: '#adadad', padding: 10}}>Profile</Text>
-          </TouchableOpacity>
-        </View>
+        
    
         <View style={{borderBottomWidth: 1, borderBottomColor: 'grey'}}>
           <TouchableOpacity onPress={() => navigation.navigate('HomeScreen')}>

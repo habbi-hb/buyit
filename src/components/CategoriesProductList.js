@@ -86,8 +86,8 @@ const RenderHeader = () => {
     </View>
   );
 };
-const CategoriesProductList = ({route}) => {
-  let navigation = useNavigation();
+const CategoriesProductList = ({navigation, route}) => {
+   navigation = useNavigation();
   const {sub_id} = route.params;
   const {cat} = route.params;
   console.log('params', sub_id);

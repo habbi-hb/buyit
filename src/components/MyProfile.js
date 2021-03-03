@@ -83,6 +83,7 @@ const RenderHeader = () => {
 let Login = () => {
   // const {ch} = route.params;
   // ch;
+  
   const [usr, setUsr] = useState('');
   const [eml, setEml] = useState('');
   const [phn, setPhn] = useState('');
@@ -93,6 +94,7 @@ let Login = () => {
     AsyncStorage.getItem('userData').then((result) => {
       console.log('result' + result);
       let user = JSON.parse(result);
+      console.log("check------------"+user)
       setUsr(user.user_name);
       setEml(user.user_email);
       setPhn(user.user_phone);
@@ -310,68 +312,7 @@ let Login = () => {
             </View>
           </View>
 
-          <View
-            style={{
-              width: '100%',
-              alignSelf: 'center',
-              borderRadius: 1,
-              elevation: 1,
-              alignItems: 'center',
-              marginTop: '5%',
-              marginBottom: '10%',
-            }}>
-            <View style={{width: '90%', marginTop: '7%'}}>
-              <Text
-                style={{
-                  color: 'black',
-                  fontSize: 18,
-                  paddingTop: 15,
-                  paddingBottom: 15,
-                }}>
-                My Account
-              </Text>
-              {[
-                {
-                  label: 'Profile Setting',
-                  function: () => navigation.navigate('MyProfile'),
-                },
-                {
-                  label: 'My Orders',
-                  function: () => navigation.navigate('CheckStatus'),
-                },
-                {
-                  label: 'Change Password',
-                  function: () => navigation.navigate('ChangePassword'),
-                },
-                {
-                  label: 'Logout',
-                  function: () =>
-                    // navigation.navigate('HomeScreen2', {us: usid}),
-                    navigation.navigate('HomeScreen2'),
-                },
-              ].map((item, key) => (
-                <TouchableOpacity
-                  style={{
-                    borderWidth: 1,
-                    borderColor: colors.ORANGE.DEFAULT,
-                    padding: 10,
-                    width: '100%',
-                    marginBottom: 20,
-                  }}
-                  key={key}
-                  onPress={item.function}>
-                  <Text
-                    style={{
-                      fontSize: 18,
-                      color: colors.ORANGE.DEFAULT,
-                      textAlign: 'center',
-                    }}>
-                    {item.label}
-                  </Text>
-                </TouchableOpacity>
-              ))}
-            </View>
-          </View>
+     
         </View>
       </ScrollView>
     </View>

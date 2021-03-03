@@ -53,25 +53,18 @@ const Header = () => {
   // const pwd = 'password';
   useEffect(() => {
     fetch(
-      'https://thecodeditors.com/test/carobar/api-user-login.php?email=' +
+      'https://thecodeditors.com/test/buy_it/api-user-login.php?email=' +
         tex +
         '&password=' +
         pwd,
-      //'http://thecodeditors.com/test/carobar/api-user-login.php?email=sameershk819@gmail.com&password=passcode1212',
+      //'http://thecodeditors.com/test/buy_it/api-user-login.php?email=sameershk819@gmail.com&password=passcode1212',
     )
       .then((response) => response.json())
       .then((json) => setData(json))
       .catch((error) => console.error(error))
       .finally(() => setLoading(false));
   }, [tex, pwd]);
-  useEffect(() => {
-     
-    AsyncStorage.getItem('RandomNumber').then((result) => console.log("our main randum number.........................."+result));
-    // async () => {
-    //   const userData = await AsyncStorage.getItem('userData');
-    //   console.log('data', JSON.parse(userData));
-    // };
-  }, []);
+
   //AsyncStorage.getItem('userId').then((result) => console.log(result));
 
   //console.log(tex);
@@ -260,16 +253,17 @@ const Recents = () => {
             renderItem={({item}) => {
               const AddToCart = (e) => {
                 
-                AsyncStorage.getItem('RandomNumber').then((result) => {
-                  console.log('result' + result);
+                AsyncStorage.getItem('userData').then((result) => {
+                  console.log('result-----------' + result);
                   let user = JSON.parse(result);
+                  console.log("..........."+ user.user_id);
+                  let ID = user.user_id;
                   const uri =
                     api.addcart +
-                    '&guest_id=' +
-                     user +
+                    '&guest_id=111111'
                     '&product_id=' +
                     item.pro_id +
-                    '&quantity=1&user_id=' + 0;
+                    '&quantity=1&user_id=' + ID;
                     
                   console.log(uri);
                   fetch(uri)
@@ -478,16 +472,17 @@ const FeaturedSlider = () => {
               const AddToCart = (e) => {
                
                  
-                AsyncStorage.getItem('RandomNumber').then((result) => {
-                  console.log('result' + result);
+                AsyncStorage.getItem('userData').then((result) => {
+                  console.log('result-----------' + result);
                   let user = JSON.parse(result);
+                  console.log("..........."+ user.user_id);
+                  let ID = user.user_id;
                   const uri =
                     api.addcart +
-                    '&guest_id=' +
-                     user +
+                    '&guest_id=111111'
                     '&product_id=' +
                     item.pro_id +
-                    '&quantity=1&user_id=' + 0;
+                    '&quantity=1&user_id=' + ID;
                     
                   console.log(uri);
                   fetch(uri)
@@ -615,16 +610,17 @@ const BestSeller = () => {
                 
            
               
-                AsyncStorage.getItem('RandomNumber').then((result) => {
-                  console.log('result' + result);
+                AsyncStorage.getItem('userData').then((result) => {
+                  console.log('result-----------' + result);
                   let user = JSON.parse(result);
+                  console.log("..........."+ user.user_id);
+                  let ID = user.user_id;
                   const uri =
                     api.addcart +
-                    '&guest_id=' +
-                     user +
+                    '&guest_id=111111'
                     '&product_id=' +
                     item.pro_id +
-                    '&quantity=1&user_id=' + 0;
+                    '&quantity=1&user_id=' + ID;
                     
                   console.log(uri);
                   fetch(uri)
@@ -749,16 +745,17 @@ const RecommenderSlider = () => {
             data={featured.Data}
             renderItem={({item}) => {
               const AddToCart = (e) => {
-                AsyncStorage.getItem('RandomNumber').then((result) => {
-                  console.log('result' + result);
+                AsyncStorage.getItem('userData').then((result) => {
+                  console.log('result-----------' + result);
                   let user = JSON.parse(result);
+                  console.log("..........."+ user.user_id);
+                  let ID = user.user_id;
                   const uri =
                     api.addcart +
-                    '&guest_id=' +
-                     user +
+                    '&guest_id=111111'
                     '&product_id=' +
                     item.pro_id +
-                    '&quantity=1&user_id=' + 0;
+                    '&quantity=1&user_id=' + ID;
                     
                   console.log(uri);
                   fetch(uri)

@@ -208,67 +208,7 @@ let Login = ({route}) => {
             </TouchableOpacity>
           </View>
 
-          <View
-            style={{
-              width: '100%',
-              alignSelf: 'center',
-              borderRadius: 1,
-              elevation: 1,
-              alignItems: 'center',
-              marginTop: '5%',
-              marginBottom: '10%',
-            }}>
-            <View style={{width: '90%', marginTop: '7%'}}>
-              <Text
-                style={{
-                  color: 'black',
-                  fontSize: 18,
-                  paddingTop: 15,
-                  paddingBottom: 15,
-                }}>
-                My Account
-              </Text>
-              {[
-                {
-                  label: 'Profile Setting',
-                  function: () => navigation.navigate('MyProfile'),
-                },
-                {
-                  label: 'My Orders',
-                  function: () => navigation.navigate('CheckStatus'),
-                },
-                {
-                  label: 'Change Password',
-                  // eslint-disable-next-line no-alert
-                  function: () => alert('You are Current on this Screen'),
-                },
-                {
-                  label: 'Logout',
-                  function: () => navigation.navigate('HomeScreen'),
-                },
-              ].map((item, key) => (
-                <TouchableOpacity
-                  style={{
-                    borderWidth: 1,
-                    borderColor: colors.ORANGE.DEFAULT,
-                    padding: 10,
-                    width: '100%',
-                    marginBottom: 20,
-                  }}
-                  key={key}
-                  onPress={item.function}>
-                  <Text
-                    style={{
-                      fontSize: 18,
-                      color: colors.ORANGE.DEFAULT,
-                      textAlign: 'center',
-                    }}>
-                    {item.label}
-                  </Text>
-                </TouchableOpacity>
-              ))}
-            </View>
-          </View>
+         
         </View>
       </ScrollView>
     </View>

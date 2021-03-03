@@ -19,22 +19,18 @@ import Loader from "./Loader";
 import { Checkbox } from 'react-native-paper';
 
 function login() {
-  
-  let navigation = useNavigation();
-  const [Checkbox, setCheckBox] = useState(false);
+  const navigation = useNavigation();
   const [isLoading, setLoading] = useState(true);
   const [userInfo, setInfo] = useState([]);
-  const [loader, setloader] = React.useState(true);
   const [usr, setUsr] = useState('');
   const [pwd, setPwd] = useState('');
   const [pop, setPop] = useState('');
-
+  const [Checkbox, setCheckBox] =useState(false);
   const clickcheckbox = () => {
     setCheckBox(true);
   }
 
   const handleLoginTap = (e) => {
-    setloader(true);
     if (usr == '') {
       Alert.alert('Enter Username or email');
       return;
@@ -78,9 +74,7 @@ function login() {
         //Alert.alert(pop);
 
         //console.log(userInfo);
-        Alert.alert("successfully logged in");
-        navigation.navigate('userNav');
-        setloader(false);
+        Alert.alert(json.result);
         AsyncStorage.setItem('userData', JSON.stringify(json.Data[0])).then(
           () =>
             AsyncStorage.getItem('userData').then((result) => {
@@ -91,8 +85,9 @@ function login() {
 
               // console.log(user.user_id);
             }),
+            
         );
-
+        navigation.navigate('userNav');
         setUsr('');
         setPwd('');
 
@@ -101,9 +96,12 @@ function login() {
       })
       .catch((error) => console.error(error))
       .finally(() => setLoading(false));
-      setloader(false);
     setPop('');
   };
+
+ 
+
+
   
 
   return (

@@ -39,7 +39,7 @@ const ProductDetailComponent = (props) => {
   }, []);
   let navigation = useNavigation();
   const pic =
-    'https://thecodeditors.com/test/single_vendor/admin/sub_category_images/';
+    'https://thecodeditors.com/test/multi_vendor /admin/sub_category_images/';
 
   return (
     <FlatList
@@ -74,7 +74,7 @@ const ProductDetailComponent = (props) => {
                     }}
                     source={{
                       uri:
-                        'https://thecodeditors.com/test/single_vendor/admin/sub_category_images/1607089266noodles.jpg',
+                        'https://thecodeditors.com/test/multi_vendor/admin/sub_category_images/1607089266noodles.jpg',
                     }}
                   />
                 </TouchableOpacity>

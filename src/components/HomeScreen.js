@@ -39,6 +39,8 @@ const initialLayoutHeight = {width: Dimensions.get('window').height};
 
 
 
+let counter=0
+
 
 const Header = () => {
   const refRBSheetBottom = useRef();
@@ -53,11 +55,11 @@ const Header = () => {
   // const pwd = 'password';
   useEffect(() => {
     fetch(
-      'https://thecodeditors.com/test/carobar/api-user-login.php?email=' +
+      'https://thecodeditors.com/test/buy_it/api-user-login.php?email=' +
         tex +
         '&password=' +
         pwd,
-      //'http://thecodeditors.com/test/carobar/api-user-login.php?email=sameershk819@gmail.com&password=passcode1212',
+      //'http://thecodeditors.com/test/buy_it/api-user-login.php?email=sameershk819@gmail.com&password=passcode1212',
     )
       .then((response) => response.json())
       .then((json) => setData(json))
@@ -77,7 +79,8 @@ const Header = () => {
   //console.log(tex);
   //console.log(pwd);
   //console.log(data.Data);
-
+  
+  
   return (
     <View style={{height: '10%'}}>
       <Modal animationType="slide" transparent={true} visible={modalVisible}>
@@ -139,7 +142,7 @@ const Header = () => {
             paddingTop: 2,
             color: 'white',
           }}>
-          25
+      {counter}
         </Text>
         <TouchableOpacity
           style={{position: 'absolute', right: '3%'}}
@@ -159,7 +162,6 @@ const Header = () => {
 
 
 
-
 const Shops = () => {
   let navigation = useNavigation();
   const screenHeight = Dimensions.get('window').height;
@@ -173,7 +175,7 @@ const Shops = () => {
       .then((response) => response.json())
       .then((json) => {
         setShop(json);
-        console.log("shop................s", shop[1])
+       // console.log("shop................s", shop[1])
     
       })
       .catch((error) => console.error(error))
@@ -196,7 +198,17 @@ const Shops = () => {
               horizontal={true}
               renderItem={({item}) => (
                 
-                  <View style={{paddingLeft: 25,
+                  <TouchableOpacity 
+                   onPress={() => { 
+                     navigation.navigate('ShopScreen', {
+                    shop_id: item.vendor_id,
+                    abc:99
+                  });
+                }}
+
+
+                
+                  style={{paddingLeft: 25,
                                 height: 70, alignItems: 'center', }}>
                                   
                       <Image
@@ -207,7 +219,7 @@ const Shops = () => {
                 {item.vendor_company_name}
               </Text>     
                  
-                    </View>
+                    </TouchableOpacity>
                
               
               )}
@@ -259,6 +271,7 @@ const Recents = () => {
             data={Recent.Data}
             renderItem={({item}) => {
               const AddToCart = (e) => {
+                counter++;
                 
                 AsyncStorage.getItem('RandomNumber').then((result) => {
                   console.log('result' + result);
@@ -287,15 +300,15 @@ const Recents = () => {
                 });
               };
               return (
-                <View>
-                  <TouchableOpacity 
+                <View style={{ marginLeft: 20, }}>
+                  <TouchableOpacity
                     onPress={() =>
                       navigation.navigate('ProductDetails', {id: item.pro_id, pic: featuredslider + item.image_name })
                     }>
                   
                   <Image
                     source={{uri: featuredslider + item.image_name}}
-                    style={{width: 180, height: 150}}
+                    style={{width: 120, height: 120}}
                     resizeMode="center"></Image>
 
                   <Paragraph
@@ -776,14 +789,14 @@ const RecommenderSlider = () => {
                 });
               };
               return (
-                <View>
+                <View style={{marginLeft: 20}}>
                    <TouchableOpacity 
                     onPress={() =>
                       navigation.navigate('ProductDetails', {id: item.pro_id, pic: featuredslider + item.image_name })
                     }>
                   <Image
                     source={{uri: featuredslider + item.image_name}}
-                    style={{width: 180, height: 150}}
+                    style={{width: 120, height: 120}}
                     resizeMode="center"></Image>
 
                   <Paragraph

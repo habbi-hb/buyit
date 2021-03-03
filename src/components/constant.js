@@ -62,16 +62,16 @@ const mainurl = 'http://thecodeditors.com/test/buy_it/';
 const mainurl2 = 'https://thecodeditors.com/test/buy_it/';
 // const mainurl3= 'https://thecodeditors.com/test/buy_it/'
 export const sliderpic =
-  'https://thecodeditors.com/test/single_vendor/admin/slider_images/';
+  'https://thecodeditors.com/test/multi_vendor/admin/slider_images/';
 export const cardimage =
-  'https://thecodeditors.com/test/single_vendor/admin/plugin/product_images/';
+  'https://thecodeditors.com/test/multi_vendor/admin/plugin/product_images/';
 export const cartimage =
-  'https://thecodeditors.com/test/single_vendor/admin/plugin/product_images/';
+  'https://thecodeditors.com/test/multi_vendor/admin/plugin/product_images/';
 export const catlist =
   'https://thecodeditors.com/test/multi_vendor/admin/sub_category_images/';
 
 export const featuredslider =
-  'https://thecodeditors.com/test/single_vendor/admin/plugin/product_images/';
+  'https://thecodeditors.com/test/multi_vendor/admin/plugin/product_images/';
 
 export let api = {
   menuCategories: '',
@@ -89,9 +89,10 @@ export let api = {
   featuredslider: 'https://thecodeditors.com/test/buy_it/api-get-allproductrole.php?role=specialoffer',
   BestSeller: 'https://thecodeditors.com/test/buy_it/api-get-allproductrole.php?role=bestseller',
   slider: mainurl + 'api-get-slider-images.php',
-
+  Search: 'https://thecodeditors.com/test/buy_it/api-get-searchproduct.php',
   categories: 'https://thecodeditors.com/test/buy_it/api-get-categories.php',
   shop: 'https://thecodeditors.com/test/buy_it/api-get-shopname.php',
+  probyshop: 'https://thecodeditors.com/test//buy_it/api-get-productbyshop.php',
   Recent: 'https://thecodeditors.com/test/buy_it/api-get-recentproducts.php',
   changepassword: mainurl2 + 'api-user-changepassword.php?id=',
 };

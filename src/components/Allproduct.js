@@ -51,11 +51,11 @@ const Header = () => {
   // const pwd = 'password';
   useEffect(() => {
     fetch(
-      'https://thecodeditors.com/test/carobar/api-user-login.php?email=' +
+      'https://thecodeditors.com/test/buy_it/api-user-login.php?email=' +
         tex +
         '&password=' +
         pwd,
-      //'http://thecodeditors.com/test/carobar/api-user-login.php?email=sameershk819@gmail.com&password=passcode1212',
+      //'http://thecodeditors.com/test/buy_it/api-user-login.php?email=sameershk819@gmail.com&password=passcode1212',
     )
       .then((response) => response.json())
       .then((json) => setData(json))
@@ -162,7 +162,7 @@ const Allproduct = () => {
   
     useEffect(() => {
      
-      fetch(api.Recent)
+      fetch(api.allproduct)
         .then((response) => response.json())
         .then((json) => {
           setAllproduct(json);
