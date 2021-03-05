@@ -83,7 +83,7 @@ export default function DrawerContent(props) {
           </TouchableOpacity>
         </View>
         <View style={{borderBottomWidth: 1, borderBottomColor: 'grey'}}>
-          <TouchableOpacity onPress={() => navigation.navigate('Cart')}>
+          <TouchableOpacity onPress={() => navigation.navigate('UserCart')}>
             <Text style={{color: '#adadad', padding: 10}}>CART</Text>
           </TouchableOpacity>
         </View>

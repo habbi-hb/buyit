@@ -101,10 +101,10 @@ const [isLoading, setLoading] = useState(true);
 
  
   useEffect(() => {
-    AsyncStorage.getItem('RandomNumber').then((result) => {
-      console.log('RandomNumberrr' + result);
+    AsyncStorage.getItem('userData').then((result) => {
+      console.log('userData id' + result);
       let Rnumber = JSON.parse(result);
-      const uri = api.cartshow + Rnumber
+      const uri = api.cartshow + Rnumber.user_id
       console.log(uri);
       
   
@@ -415,7 +415,9 @@ const [isLoading, setLoading] = useState(true);
                 marginTop: 20,
               }}
               onPress={() =>
-                navigation.navigate('login')
+                navigation.navigate('CheckOut', {
+                  totall: totalPrice,
+                })
               }>
               <Text
                 style={{

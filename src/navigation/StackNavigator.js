@@ -52,6 +52,8 @@ import usernav from '../components/usernavigator/AdDrawerNavigator'
 import Allproduct from '../components/Allproduct'
 import Searchproduct from '../components/Searchproduct'
 import userdashboard from '../components/userdashboard'
+import UserCart from '../components/usercart'
+
 
 import {api} from '../components/constant';
 
@@ -407,6 +409,11 @@ const App = () => {
            <Stack.Screen
             name="Userdashboard"
             component={userdashboard}
+            options={options}
+          /> 
+          <Stack.Screen
+            name="UserCart"
+            component={UserCart}
             options={options}
           /> 
         </Stack.Navigator>

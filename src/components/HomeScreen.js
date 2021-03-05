@@ -34,8 +34,8 @@ import {api, sliderpic, featuredslider, slider, allproduct,  Recent, shop} from 
 
 import BottomAccount from './BottomAccount';
 
-const initialLayout = {width: Dimensions.get('window').width};
-const initialLayoutHeight = {width: Dimensions.get('window').height};
+const rootwidth = {width: Dimensions.get('window').width};
+const rootHeight = {width: Dimensions.get('window').height};
 
 
 
@@ -300,37 +300,36 @@ const Recents = () => {
                 });
               };
               return (
-                <View style={{ marginLeft: 20, }}>
-                  <TouchableOpacity
-                    onPress={() =>
-                      navigation.navigate('ProductDetails', {id: item.pro_id, pic: featuredslider + item.image_name })
-                    }>
-                  
-                  <Image
-                    source={{uri: featuredslider + item.image_name}}
-                    style={{width: 120, height: 120}}
-                    resizeMode="center"></Image>
+                <View style={{ width: 200, }}>
+                    <TouchableOpacity 
+                      onPress={() =>
+                        navigation.navigate('ProductDetails', {id: item.pro_id, pic: featuredslider + item.image_name })
+                      }>
+                    <Image
+                      source={{uri: featuredslider + item.image_name}}
+                      style={{width: 120, height: 150, alignSelf:'center'}}
+                      resizeMode="center"></Image>
 
-                  <Paragraph
-                    style={{
-                      fontSize: 12,
-                      marginLeft: 20,
-                      color: colors.LIGHTGREY.DEFAULT,
-                    }}>
+                    <Paragraph
+                      style={{
+                        fontSize: 12,
+                        marginLeft: 20,
+                        color: colors.LIGHTGREY.DEFAULT,
+                      }}>
                     {item.cat_id}
-                  </Paragraph>
-                  <Paragraph style={{marginLeft: 20}}>
-                    {item.pro_name}
-                  </Paragraph>
+                    </Paragraph>
+                    <Paragraph style={{marginLeft: 20}}>
+                      {item.pro_name}
+                    </Paragraph>
                   </TouchableOpacity>
-                  <Paragraph
-                    style={{
-                      marginLeft: 20,
-                      fontSize: 14,
-                      color: colors.ORANGE.DEFAULT,
-                    }}>
-                    PKR {item.pro_price}
-                  </Paragraph>
+                    <Paragraph
+                      style={{
+                        marginLeft: 20,
+                        fontSize: 14,
+                        color: colors.ORANGE.DEFAULT,
+                      }}>
+                      PKR {item.pro_price}
+                    </Paragraph>
                   <TouchableOpacity
                     style={{
                       borderColor: colors.ORANGE.DEFAULT,
@@ -518,56 +517,56 @@ const FeaturedSlider = () => {
                 });
               };
               return (
-                <View>
-                  <TouchableOpacity 
-                    onPress={() =>
-                      navigation.navigate('ProductDetails', {id: item.pro_id, pic: featuredslider + item.image_name })
-                    }>
-                  <Image
-                    source={{uri: featuredslider + item.image_name}}
-                    style={{width: 180, height: 150}}
-                    resizeMode="center"></Image>
+                <View style={{ width: 200, }}>
+                <TouchableOpacity 
+                  onPress={() =>
+                    navigation.navigate('ProductDetails', {id: item.pro_id, pic: featuredslider + item.image_name })
+                  }>
+                <Image
+                  source={{uri: featuredslider + item.image_name}}
+                  style={{width: 120, height: 150, alignSelf:'center'}}
+                  resizeMode="center"></Image>
 
-                  <Paragraph
-                    style={{
-                      fontSize: 12,
-                      marginLeft: 20,
-                      color: colors.LIGHTGREY.DEFAULT,
-                    }}>
-                   {item.cat_id}
-                  </Paragraph>
-                  <Paragraph style={{marginLeft: 20}}>
-                    {item.pro_name}
-                  </Paragraph>
-                </TouchableOpacity>
-                  <Paragraph
-                    style={{
-                      marginLeft: 20,
-                      fontSize: 14,
-                      color: colors.ORANGE.DEFAULT,
-                    }}>
-                    PKR {item.pro_price}
-                  </Paragraph>
-                  <TouchableOpacity
-                    style={{
-                      borderColor: colors.ORANGE.DEFAULT,
-                      width: '80%',
-                      borderWidth: 1,
-                      marginTop: 5,
-                      marginLeft: 20,
-                      marginRight: 20,
-                    }}
-                    onPress={AddToCart}>
-                    <Text
-                      style={{
-                        fontSize: 18,
-                        color: colors.ORANGE.DEFAULT,
-                        textAlign: 'center',
-                      }}>
-                      Add
-                    </Text>
-                  </TouchableOpacity>
-                </View>
+                <Paragraph
+                  style={{
+                    fontSize: 12,
+                    marginLeft: 20,
+                    color: colors.LIGHTGREY.DEFAULT,
+                  }}>
+                {item.cat_id}
+                </Paragraph>
+                <Paragraph style={{marginLeft: 20}}>
+                  {item.pro_name}
+                </Paragraph>
+              </TouchableOpacity>
+                <Paragraph
+                  style={{
+                    marginLeft: 20,
+                    fontSize: 14,
+                    color: colors.ORANGE.DEFAULT,
+                  }}>
+                  PKR {item.pro_price}
+                </Paragraph>
+              <TouchableOpacity
+                style={{
+                  borderColor: colors.ORANGE.DEFAULT,
+                  width: '80%',
+                  borderWidth: 1,
+                  marginTop: 5,
+                  marginLeft: 20,
+                  marginRight: 20,
+                }}
+                onPress={AddToCart}>
+                <Text
+                  style={{
+                    fontSize: 18,
+                    color: colors.ORANGE.DEFAULT,
+                    textAlign: 'center',
+                  }}>
+                  Add
+                </Text>
+              </TouchableOpacity>
+            </View>
               );
             }}
           />
@@ -655,35 +654,36 @@ const BestSeller = () => {
                 });
               };
               return (
-                <View>
-                  <TouchableOpacity 
-                    onPress={() =>
-                      navigation.navigate('ProductDetails', {id: item.pro_id, pic: featuredslider + item.image_name })
-                    }>
-                  <Image
-                    source={{uri: featuredslider + item.image_name}}
-                    style={{width: 180, height: 150}}
-                    resizeMode="center"></Image>
+                <View style={{ width: 200, }}>
+                    <TouchableOpacity 
+                      onPress={() =>
+                        navigation.navigate('ProductDetails', {id: item.pro_id, pic: featuredslider + item.image_name })
+                      }>
+                    <Image
+                      source={{uri: featuredslider + item.image_name}}
+                      style={{width: 120, height: 150, alignSelf:'center'}}
+                      resizeMode="center"></Image>
 
-                  <Paragraph
-                    style={{
-                      fontSize: 12,
-                      marginLeft: 20,
-                      color: colors.LIGHTGREY.DEFAULT,
-                    }}>
+                    <Paragraph
+                      style={{
+                        fontSize: 12,
+                        marginLeft: 20,
+                        color: colors.LIGHTGREY.DEFAULT,
+                      }}>
                     {item.cat_id}
-                  </Paragraph>
-                  <Paragraph style={{marginLeft: 20}}>
-                    {item.pro_name}
-                  </Paragraph></TouchableOpacity>
-                  <Paragraph
-                    style={{
-                      marginLeft: 20,
-                      fontSize: 14,
-                      color: colors.ORANGE.DEFAULT,
-                    }}>
-                    PKR {item.pro_price}
-                  </Paragraph>
+                    </Paragraph>
+                    <Paragraph style={{marginLeft: 20}}>
+                      {item.pro_name}
+                    </Paragraph>
+                  </TouchableOpacity>
+                    <Paragraph
+                      style={{
+                        marginLeft: 20,
+                        fontSize: 14,
+                        color: colors.ORANGE.DEFAULT,
+                      }}>
+                      PKR {item.pro_price}
+                    </Paragraph>
                   <TouchableOpacity
                     style={{
                       borderColor: colors.ORANGE.DEFAULT,
@@ -789,36 +789,36 @@ const RecommenderSlider = () => {
                 });
               };
               return (
-                <View style={{marginLeft: 20}}>
-                   <TouchableOpacity 
-                    onPress={() =>
-                      navigation.navigate('ProductDetails', {id: item.pro_id, pic: featuredslider + item.image_name })
-                    }>
-                  <Image
-                    source={{uri: featuredslider + item.image_name}}
-                    style={{width: 120, height: 120}}
-                    resizeMode="center"></Image>
+                <View style={{ width: 200, }}>
+                    <TouchableOpacity 
+                      onPress={() =>
+                        navigation.navigate('ProductDetails', {id: item.pro_id, pic: featuredslider + item.image_name })
+                      }>
+                    <Image
+                      source={{uri: featuredslider + item.image_name}}
+                      style={{width: 120, height: 150, alignSelf:'center'}}
+                      resizeMode="center"></Image>
 
-                  <Paragraph
-                    style={{
-                      fontSize: 12,
-                      marginLeft: 20,
-                      color: colors.LIGHTGREY.DEFAULT,
-                    }}>
+                    <Paragraph
+                      style={{
+                        fontSize: 12,
+                        marginLeft: 20,
+                        color: colors.LIGHTGREY.DEFAULT,
+                      }}>
                     {item.cat_id}
-                  </Paragraph>
-                  <Paragraph style={{marginLeft: 20}}>
-                    {item.pro_name}
-                  </Paragraph>
+                    </Paragraph>
+                    <Paragraph style={{marginLeft: 20}}>
+                      {item.pro_name}
+                    </Paragraph>
                   </TouchableOpacity>
-                  <Paragraph
-                    style={{
-                      marginLeft: 20,
-                      fontSize: 14,
-                      color: colors.ORANGE.DEFAULT,
-                    }}>
-                    PKR {item.pro_price}
-                  </Paragraph>
+                    <Paragraph
+                      style={{
+                        marginLeft: 20,
+                        fontSize: 14,
+                        color: colors.ORANGE.DEFAULT,
+                      }}>
+                      PKR {item.pro_price}
+                    </Paragraph>
                   <TouchableOpacity
                     style={{
                       borderColor: colors.ORANGE.DEFAULT,

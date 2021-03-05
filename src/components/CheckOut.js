@@ -84,8 +84,9 @@ const CheckOut = ({route, navigation}) => {
   const [Payment, setPayment] = useState('cash');
 
   const handleCheckOutTap = (e) => {
-    AsyncStorage.getItem('userId').then((result) => {
-      console.log(result);
+    AsyncStorage.getItem('userData').then((result) => {
+      console.log('userData ID' + result);
+      let user = JSON.parse(result);
       if (Fname == '') {
         Alert.alert('Enter First Name');
         return;
@@ -155,14 +156,14 @@ const CheckOut = ({route, navigation}) => {
         '&email=' +
         Email +
         '&payment=cash&' +
-        result;
+        'user_id=' + user.user_id;
       console.log(uri);
       fetch(uri)
         .then((response) => response.json())
         .then((json) => {
           setData(json);
           Alert.alert(data.result);
-          navigation.navigate('HomeScreen');
+         // navigation.navigate('HomeScreen');
         })
         .catch((error) => console.error(error))
         .finally(() => setLoading(false));

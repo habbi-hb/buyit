@@ -66,14 +66,7 @@ const Header = () => {
       .catch((error) => console.error(error))
       .finally(() => setLoading(false));
   }, [tex, pwd]);
-  useEffect(() => {
-     
-    AsyncStorage.getItem('RandomNumber').then((result) => console.log("our main randum number.........................."+result));
-    // async () => {
-    //   const userData = await AsyncStorage.getItem('userData');
-    //   console.log('data', JSON.parse(userData));
-    // };
-  }, []);
+  
   //AsyncStorage.getItem('userId').then((result) => console.log(result));
 
   //console.log(tex);
@@ -146,7 +139,7 @@ const Header = () => {
         </Text>
         <TouchableOpacity
           style={{position: 'absolute', right: '3%'}}
-          onPress={() => navigation.navigate('Cart')}
+          onPress={() => navigation.navigate('UserCart')}
          >
           <BottomAccount refRBSheet={refRBSheet} />
 
@@ -491,16 +484,15 @@ const FeaturedSlider = () => {
               const AddToCart = (e) => {
                
                  
-                AsyncStorage.getItem('RandomNumber').then((result) => {
-                  console.log('result' + result);
+                AsyncStorage.getItem('userData').then((result) => {
+                  console.log('userData id' + result);
                   let user = JSON.parse(result);
                   const uri =
                     api.addcart +
-                    '&guest_id=' +
-                     user +
+                    '&guest_id=118050922'+
                     '&product_id=' +
                     item.pro_id +
-                    '&quantity=1&user_id=' + 0;
+                    '&quantity=1&user_id=' + user.user_id;
                     
                   console.log(uri);
                   fetch(uri)
