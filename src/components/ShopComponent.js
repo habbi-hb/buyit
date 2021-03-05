@@ -106,7 +106,7 @@ console.log("props........."+props.shopids)
                         marginLeft: 20,
                         color: colors.LIGHTGREY.DEFAULT,
                       }}>
-                        {item.pro_des}
+                        {item.cat_id}
                     
                     </Paragraph>
                     <Paragraph style={{marginLeft: 20}}>

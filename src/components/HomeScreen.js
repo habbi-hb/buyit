@@ -317,7 +317,7 @@ const Recents = () => {
                       marginLeft: 20,
                       color: colors.LIGHTGREY.DEFAULT,
                     }}>
-                    Heavy
+                    {item.cat_id}
                   </Paragraph>
                   <Paragraph style={{marginLeft: 20}}>
                     {item.pro_name}
@@ -534,7 +534,7 @@ const FeaturedSlider = () => {
                       marginLeft: 20,
                       color: colors.LIGHTGREY.DEFAULT,
                     }}>
-                   heavy
+                   {item.cat_id}
                   </Paragraph>
                   <Paragraph style={{marginLeft: 20}}>
                     {item.pro_name}
@@ -671,7 +671,7 @@ const BestSeller = () => {
                       marginLeft: 20,
                       color: colors.LIGHTGREY.DEFAULT,
                     }}>
-                    Heavy
+                    {item.cat_id}
                   </Paragraph>
                   <Paragraph style={{marginLeft: 20}}>
                     {item.pro_name}
@@ -805,7 +805,7 @@ const RecommenderSlider = () => {
                       marginLeft: 20,
                       color: colors.LIGHTGREY.DEFAULT,
                     }}>
-                    Heavy
+                    {item.cat_id}
                   </Paragraph>
                   <Paragraph style={{marginLeft: 20}}>
                     {item.pro_name}

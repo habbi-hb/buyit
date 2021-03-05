@@ -83,40 +83,33 @@ const RenderHeader = () => {
 let Login = () => {
   // const {ch} = route.params;
   // ch;
-  
-  const [usr, setUsr] = useState('');
-  const [eml, setEml] = useState('');
-  const [phn, setPhn] = useState('');
   const [ref, setRef] = useState('true');
-  const [usid, setUsid] = useState('');
+  const [usr, setUsr] = useState('');
+    const [eml, setEml] = useState('');
+    const [phn, setPhn] = useState('');
+    
+    const [usid, setUsid] = useState('');
   let navigation = useNavigation();
-  if (ref) {
-    AsyncStorage.getItem('userData').then((result) => {
-      console.log('result' + result);
-      let user = JSON.parse(result);
-      console.log("check------------"+user)
-      setUsr(user.user_name);
-      setEml(user.user_email);
-      setPhn(user.user_phone);
-      setUsid(user.user_id);
-      setRef('false');
-    });
-  }
-  let form = [
-    {
-      label: 'Full Name *',
-      placeholder: 'Full Name',
-    },
-
-    {
-      label: 'Email address *',
-      placeholder: 'example@gmail.com',
-    },
-    {
-      label: 'Phone *',
-      placeholder: 'Phone',
-    },
-  ];
+  useEffect(() => { 
+  
+    
+    
+    if (ref) {
+      AsyncStorage.getItem('userData').then((result) => {
+       // console.log('result' + result);
+        let user = JSON.parse(result);
+        console.log("check------------"+user)
+        setUsr(user.user_name);
+        setEml(user.user_email);
+        setPhn(user.user_phone);
+        setUsid(user.user_id);
+        setRef('false');
+      });
+    }
+  ;
+ 
+  }, []);
+  
 
   return (
     <View
@@ -200,7 +193,7 @@ let Login = () => {
                 placeholderTextColor={'#808080'}
                 autoCapitilize={false}
                 value={eml}
-                onChangeText={(text) => setUsr(text)}
+                onChangeText={(text) => setEml(text)}
               />
               <Text>Phone Number *</Text>
               <TextInput
@@ -209,7 +202,7 @@ let Login = () => {
                 placeholderTextColor={'#808080'}
                 autoCapitilize={false}
                 value={phn}
-                onChangeText={(text) => setUsr(text)}
+                onChangeText={(text) => setPhn(text)}
               />
               <TouchableOpacity
                 style={{

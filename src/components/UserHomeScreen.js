@@ -39,6 +39,8 @@ const initialLayoutHeight = {width: Dimensions.get('window').height};
 
 
 
+let counter=0
+
 
 const Header = () => {
   const refRBSheetBottom = useRef();
@@ -64,13 +66,21 @@ const Header = () => {
       .catch((error) => console.error(error))
       .finally(() => setLoading(false));
   }, [tex, pwd]);
-
+  useEffect(() => {
+     
+    AsyncStorage.getItem('RandomNumber').then((result) => console.log("our main randum number.........................."+result));
+    // async () => {
+    //   const userData = await AsyncStorage.getItem('userData');
+    //   console.log('data', JSON.parse(userData));
+    // };
+  }, []);
   //AsyncStorage.getItem('userId').then((result) => console.log(result));
 
   //console.log(tex);
   //console.log(pwd);
   //console.log(data.Data);
-
+  
+  
   return (
     <View style={{height: '10%'}}>
       <Modal animationType="slide" transparent={true} visible={modalVisible}>
@@ -132,7 +142,7 @@ const Header = () => {
             paddingTop: 2,
             color: 'white',
           }}>
-          25
+      {counter}
         </Text>
         <TouchableOpacity
           style={{position: 'absolute', right: '3%'}}
@@ -152,7 +162,6 @@ const Header = () => {
 
 
 
-
 const Shops = () => {
   let navigation = useNavigation();
   const screenHeight = Dimensions.get('window').height;
@@ -166,7 +175,7 @@ const Shops = () => {
       .then((response) => response.json())
       .then((json) => {
         setShop(json);
-        console.log("shop................s", shop[1])
+       // console.log("shop................s", shop[1])
     
       })
       .catch((error) => console.error(error))
@@ -189,7 +198,17 @@ const Shops = () => {
               horizontal={true}
               renderItem={({item}) => (
                 
-                  <View style={{paddingLeft: 25,
+                  <TouchableOpacity 
+                   onPress={() => { 
+                     navigation.navigate('ShopScreen', {
+                    shop_id: item.vendor_id,
+                    abc:99
+                  });
+                }}
+
+
+                
+                  style={{paddingLeft: 25,
                                 height: 70, alignItems: 'center', }}>
                                   
                       <Image
@@ -200,7 +219,7 @@ const Shops = () => {
                 {item.vendor_company_name}
               </Text>     
                  
-                    </View>
+                    </TouchableOpacity>
                
               
               )}
@@ -252,18 +271,18 @@ const Recents = () => {
             data={Recent.Data}
             renderItem={({item}) => {
               const AddToCart = (e) => {
+                counter++;
                 
-                AsyncStorage.getItem('userData').then((result) => {
-                  console.log('result-----------' + result);
+                AsyncStorage.getItem('RandomNumber').then((result) => {
+                  console.log('result' + result);
                   let user = JSON.parse(result);
-                  console.log("..........."+ user.user_id);
-                  let ID = user.user_id;
                   const uri =
                     api.addcart +
-                    '&guest_id=111111'
+                    '&guest_id=' +
+                     user +
                     '&product_id=' +
                     item.pro_id +
-                    '&quantity=1&user_id=' + ID;
+                    '&quantity=1&user_id=' + 0;
                     
                   console.log(uri);
                   fetch(uri)
@@ -281,15 +300,15 @@ const Recents = () => {
                 });
               };
               return (
-                <View>
-                  <TouchableOpacity 
+                <View style={{ marginLeft: 20, }}>
+                  <TouchableOpacity
                     onPress={() =>
                       navigation.navigate('ProductDetails', {id: item.pro_id, pic: featuredslider + item.image_name })
                     }>
                   
                   <Image
                     source={{uri: featuredslider + item.image_name}}
-                    style={{width: 180, height: 150}}
+                    style={{width: 120, height: 120}}
                     resizeMode="center"></Image>
 
                   <Paragraph
@@ -298,7 +317,7 @@ const Recents = () => {
                       marginLeft: 20,
                       color: colors.LIGHTGREY.DEFAULT,
                     }}>
-                    Heavy
+                    {item.cat_id}
                   </Paragraph>
                   <Paragraph style={{marginLeft: 20}}>
                     {item.pro_name}
@@ -472,17 +491,16 @@ const FeaturedSlider = () => {
               const AddToCart = (e) => {
                
                  
-                AsyncStorage.getItem('userData').then((result) => {
-                  console.log('result-----------' + result);
+                AsyncStorage.getItem('RandomNumber').then((result) => {
+                  console.log('result' + result);
                   let user = JSON.parse(result);
-                  console.log("..........."+ user.user_id);
-                  let ID = user.user_id;
                   const uri =
                     api.addcart +
-                    '&guest_id=111111'
+                    '&guest_id=' +
+                     user +
                     '&product_id=' +
                     item.pro_id +
-                    '&quantity=1&user_id=' + ID;
+                    '&quantity=1&user_id=' + 0;
                     
                   console.log(uri);
                   fetch(uri)
@@ -516,7 +534,7 @@ const FeaturedSlider = () => {
                       marginLeft: 20,
                       color: colors.LIGHTGREY.DEFAULT,
                     }}>
-                   heavy
+                   {item.cat_id}
                   </Paragraph>
                   <Paragraph style={{marginLeft: 20}}>
                     {item.pro_name}
@@ -610,17 +628,16 @@ const BestSeller = () => {
                 
            
               
-                AsyncStorage.getItem('userData').then((result) => {
-                  console.log('result-----------' + result);
+                AsyncStorage.getItem('RandomNumber').then((result) => {
+                  console.log('result' + result);
                   let user = JSON.parse(result);
-                  console.log("..........."+ user.user_id);
-                  let ID = user.user_id;
                   const uri =
                     api.addcart +
-                    '&guest_id=111111'
+                    '&guest_id=' +
+                     user +
                     '&product_id=' +
                     item.pro_id +
-                    '&quantity=1&user_id=' + ID;
+                    '&quantity=1&user_id=' + 0;
                     
                   console.log(uri);
                   fetch(uri)
@@ -654,7 +671,7 @@ const BestSeller = () => {
                       marginLeft: 20,
                       color: colors.LIGHTGREY.DEFAULT,
                     }}>
-                    Heavy
+                    {item.cat_id}
                   </Paragraph>
                   <Paragraph style={{marginLeft: 20}}>
                     {item.pro_name}
@@ -745,17 +762,16 @@ const RecommenderSlider = () => {
             data={featured.Data}
             renderItem={({item}) => {
               const AddToCart = (e) => {
-                AsyncStorage.getItem('userData').then((result) => {
-                  console.log('result-----------' + result);
+                AsyncStorage.getItem('RandomNumber').then((result) => {
+                  console.log('result' + result);
                   let user = JSON.parse(result);
-                  console.log("..........."+ user.user_id);
-                  let ID = user.user_id;
                   const uri =
                     api.addcart +
-                    '&guest_id=111111'
+                    '&guest_id=' +
+                     user +
                     '&product_id=' +
                     item.pro_id +
-                    '&quantity=1&user_id=' + ID;
+                    '&quantity=1&user_id=' + 0;
                     
                   console.log(uri);
                   fetch(uri)
@@ -773,14 +789,14 @@ const RecommenderSlider = () => {
                 });
               };
               return (
-                <View>
+                <View style={{marginLeft: 20}}>
                    <TouchableOpacity 
                     onPress={() =>
                       navigation.navigate('ProductDetails', {id: item.pro_id, pic: featuredslider + item.image_name })
                     }>
                   <Image
                     source={{uri: featuredslider + item.image_name}}
-                    style={{width: 180, height: 150}}
+                    style={{width: 120, height: 120}}
                     resizeMode="center"></Image>
 
                   <Paragraph
@@ -789,7 +805,7 @@ const RecommenderSlider = () => {
                       marginLeft: 20,
                       color: colors.LIGHTGREY.DEFAULT,
                     }}>
-                    Heavy
+                    {item.cat_id}
                   </Paragraph>
                   <Paragraph style={{marginLeft: 20}}>
                     {item.pro_name}

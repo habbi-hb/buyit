@@ -162,6 +162,7 @@ const CheckOut = ({route, navigation}) => {
         .then((json) => {
           setData(json);
           Alert.alert(data.result);
+          navigation.navigate('HomeScreen');
         })
         .catch((error) => console.error(error))
         .finally(() => setLoading(false));
@@ -402,7 +403,7 @@ const CheckOut = ({route, navigation}) => {
               Total :
             </Text>
             <Text style={{color: colors.ORANGE.DEFAULT, fontSize: 18}}>
-              PKR 4450
+              PKR {totall}
             </Text>
           </View>
 
